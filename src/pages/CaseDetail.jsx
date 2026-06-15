@@ -1,22 +1,36 @@
 import { useState, useRef, useEffect } from "react";
 import {
   Btn, Badge, ProgressRing, Card, SectionLabel, Spinner, ErrorMsg,
-  STATUS_COLORS, STATUSES,
+  STATUS_COLORS, STATUSES, CATEGORY_META, SENT_STATUSES, fmtDate,
 } from "../components/ui.jsx";
 import * as api from "../api.js";
-
-const SENT_STATUSES = new Set(["Letter Sent", "Following Up", "Reversed", "Upheld", "Escalated"]);
 
 export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
   const [denial, setDenial] = useState(initial);
   const [letter, setLetter] = useState(initial.letter || "");
+  const [loadingFull, setLoadingFull] = useState(!initial.analysis);
   const [genLetter, setGenLetter] = useState(false);
   const [letterError, setLetterError] = useState("");
+  const [extReview, setExtReview] = useState("");
+  const [genExtReview, setGenExtReview] = useState(false);
+  const [showExtReview, setShowExtReview] = useState(false);
   const [chat, setChat] = useState([]);
   const [chatMsg, setChatMsg] = useState("");
   const [chatLoading, setChatLoading] = useState(false);
   const [showChat, setShowChat] = useState(false);
   const chatEnd = useRef(null);
+
+  // The case list omits analysis + letter for performance — fetch the full record on mount
+  useEffect(() => {
+    if (initial.analysis) return; // already have full data (e.g. came from IntakeWizard)
+    api.getCase(initial.id)
+      .then((full) => {
+        setDenial(full);
+        setLetter(full.letter || "");
+      })
+      .catch(() => {}) // non-fatal — display whatever we have
+      .finally(() => setLoadingFull(false));
+  }, [initial.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const a = denial.analysis || {};
   const n = denial.notes || {};
@@ -57,6 +71,31 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
     const el = document.createElement("a");
     el.href = url;
     el.download = `appeal-case-${denial.id}.txt`;
+    el.click();
+    URL.revokeObjectURL(url);
+  };
+
+  // ── External review letter ──────────────────────────────────────────────────
+  const handleGenExtReview = async () => {
+    setGenExtReview(true);
+    setExtReview("");
+    setShowExtReview(true);
+    const chunks = [];
+    try {
+      await api.streamExternalReview(denial.id, (chunk) => { chunks.push(chunk); setExtReview(chunks.join("")); });
+    } catch {
+      setExtReview("Error generating letter. Please try again.");
+    } finally {
+      setGenExtReview(false);
+    }
+  };
+
+  const downloadExtReview = () => {
+    const blob = new Blob([extReview], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const el = document.createElement("a");
+    el.href = url;
+    el.download = `external-review-case-${denial.id}.txt`;
     el.click();
     URL.revokeObjectURL(url);
   };
@@ -110,15 +149,29 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
       ts: timelineEntries.find((t) => /letter|draft/i.test(t.event))?.ts,
     },
     {
-      label: "Email Sent",
-      sub: "Customer notified",
+      label: "Filed",
+      sub: emailSent ? "Appeal submitted" : "Customer notified",
       done: emailSent,
       active: false,
-      ts: timelineEntries.find((t) => /email|sent/i.test(t.event))?.ts,
+      ts: timelineEntries.find((t) => /fax|mailed|certified|emailed|notif/i.test(t.event))?.ts,
     },
   ];
 
   const currentPipelineStep = pipeline.findIndex((s) => s.active);
+
+  if (loadingFull) {
+    return (
+      <div style={{ maxWidth: 900, margin: "0 auto" }}>
+        <button onClick={onBack} style={{ background: "none", color: "#6B7280", marginBottom: 20, fontSize: 14, padding: 0, border: "none", cursor: "pointer" }}>
+          ← All Cases
+        </button>
+        <div style={{ display: "flex", alignItems: "center", gap: 14, padding: "32px 0", color: "#4B5563" }}>
+          <Spinner size={18} />
+          <span style={{ fontSize: 14 }}>Loading case…</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={{ maxWidth: 900, margin: "0 auto" }}>
@@ -149,6 +202,11 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
               ${Number(denial.amount).toLocaleString()}
             </div>
           )}
+          {denial.denial_category && CATEGORY_META[denial.denial_category] && (
+            <Badge color={CATEGORY_META[denial.denial_category].color}>
+              {CATEGORY_META[denial.denial_category].label}
+            </Badge>
+          )}
           <select
             value={denial.status}
             onChange={(e) => updateStatus(e.target.value)}
@@ -158,6 +216,51 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
           </select>
         </div>
       </div>
+
+      {/* ── Deadline alert ────────────────────────────────────────────────────── */}
+      {denial.appeal_deadline && !SENT_STATUSES.has(denial.status) && (() => {
+        const daysLeft = Math.ceil((new Date(denial.appeal_deadline) - new Date()) / 86400000);
+        if (daysLeft > 14 || daysLeft < 0) return null;
+        const urgent = daysLeft <= 3;
+        const color  = urgent ? "#EF4444" : "#F59E0B";
+        return (
+          <div style={{
+            background: `${color}12`, border: `1px solid ${color}30`,
+            borderRadius: 10, padding: "12px 18px", marginBottom: 16,
+            display: "flex", alignItems: "center", gap: 12,
+          }}>
+            <span style={{ fontSize: 20 }}>{urgent ? "🚨" : "⚠️"}</span>
+            <div style={{ flex: 1 }}>
+              <span style={{ fontSize: 13, fontWeight: 600, color }}>
+                Appeal deadline: {fmtDate(denial.appeal_deadline)}
+              </span>
+              <span style={{ fontSize: 13, color: "#9CA3AF", marginLeft: 8 }}>
+                ({daysLeft} day{daysLeft !== 1 ? "s" : ""} remaining)
+              </span>
+            </div>
+            <span style={{ fontSize: 12, color: "#6B7280" }}>File immediately</span>
+          </div>
+        );
+      })()}
+
+      {/* ── Delivery tracking ─────────────────────────────────────────────────── */}
+      {denial.delivery_method && (
+        <div style={{
+          background: "#10B98112", border: "1px solid #10B98130",
+          borderRadius: 10, padding: "12px 18px", marginBottom: 16,
+          display: "flex", alignItems: "center", gap: 12, fontSize: 13,
+        }}>
+          <span style={{ fontSize: 16 }}>{denial.delivery_method === "fax" ? "📠" : "📬"}</span>
+          <span style={{ color: "#10B981", fontWeight: 500 }}>
+            Appeal filed via {denial.delivery_method === "fax" ? "fax" : "USPS Certified Mail"}
+          </span>
+          {denial.delivery_tracking && (
+            <span style={{ color: "#6B7280", fontFamily: "monospace", fontSize: 12 }}>
+              {denial.delivery_tracking}
+            </span>
+          )}
+        </div>
+      )}
 
       {/* ── Agent pipeline ────────────────────────────────────────────────────── */}
       <Card style={{ marginBottom: 20 }}>
@@ -229,7 +332,7 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
           <ProgressRing value={a.winProbability} size={88} />
           <div style={{ flex: 1 }}>
             <SectionLabel>AI Assessment</SectionLabel>
-            <div style={{ fontSize: 15, lineHeight: 1.7, marginBottom: 12, color: "#D1D5DB" }}>{a.summary}</div>
+            <div style={{ fontSize: 13, lineHeight: 1.65, marginBottom: 12, color: "#D1D5DB" }}>{a.summary}</div>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
               <Badge color={a.urgency === "high" ? "#EF4444" : a.urgency === "medium" ? "#F59E0B" : "#10B981"}>
                 {a.urgency} urgency
@@ -244,7 +347,7 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
       )}
 
       {/* ── Case Info + Strategy ──────────────────────────────────────────────── */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 14 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 14, alignItems: "start" }}>
         <Card>
           <SectionLabel>Case Information</SectionLabel>
           <InfoRow label="Customer email"  value={n.patientEmail || "—"} highlight />
@@ -280,16 +383,50 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
             )}
           </Card>
         ) : (
-          <Card>
-            <SectionLabel>Denial Reason</SectionLabel>
-            <p style={{ lineHeight: 1.7, color: "#9CA3AF", fontSize: 14 }}>
-              {denial.denial_reason || "No denial reason on file."}
-            </p>
-            {analyzing && (
-              <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 16, color: "#8B5CF6", fontSize: 13 }}>
-                <Spinner size={13} color="#8B5CF6" />
-                Analysis in progress…
-              </div>
+          <Card
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              minHeight: 160,
+              textAlign: "center",
+            }}
+          >
+            {analyzing ? (
+              <>
+                <Spinner size={24} color="#8B5CF6" />
+                <div style={{ fontSize: 14, color: "#8B5CF6", marginTop: 16, fontWeight: 600 }}>
+                  Analysis in progress…
+                </div>
+                <div style={{ fontSize: 12, color: "#4B5563", marginTop: 6, lineHeight: 1.6 }}>
+                  Building legal strategy and calculating win probability
+                </div>
+              </>
+            ) : denial.status === "Error" ? (
+              <>
+                <div style={{ fontSize: 28, marginBottom: 10 }}>⚠️</div>
+                <div style={{ fontSize: 14, color: "#EF4444", fontWeight: 600 }}>Processing failed</div>
+                <div style={{ fontSize: 12, color: "#4B5563", marginTop: 6, lineHeight: 1.6 }}>
+                  Change status to <strong style={{ color: "#9CA3AF" }}>New</strong> then use Re-analyze to retry
+                </div>
+              </>
+            ) : denial.status === "Info Needed" ? (
+              <>
+                <div style={{ fontSize: 28, marginBottom: 10 }}>✉️</div>
+                <div style={{ fontSize: 14, color: "#F59E0B", fontWeight: 600 }}>Waiting on customer</div>
+                <div style={{ fontSize: 12, color: "#4B5563", marginTop: 6, lineHeight: 1.6, maxWidth: 200 }}>
+                  We emailed the customer asking for missing information. Strategy will generate once they respond.
+                </div>
+              </>
+            ) : (
+              <>
+                <div style={{ fontSize: 28, marginBottom: 10 }}>🔍</div>
+                <div style={{ fontSize: 14, color: "#6B7280", fontWeight: 600 }}>Appeal strategy pending</div>
+                <div style={{ fontSize: 12, color: "#4B5563", marginTop: 6, lineHeight: 1.6 }}>
+                  AI analysis will populate this panel automatically
+                </div>
+              </>
             )}
           </Card>
         )}
@@ -297,26 +434,28 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
 
       {/* ── Key Arguments + Evidence ──────────────────────────────────────────── */}
       {(a.keyArgs?.length > 0 || a.evidenceNeeded?.length > 0) && (
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 14 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 14, alignItems: "start" }}>
           {a.keyArgs?.length > 0 && (
             <Card>
               <SectionLabel>Key Arguments</SectionLabel>
-              {a.keyArgs.map((arg, i) => (
-                <div key={i} style={{ display: "flex", gap: 10, marginBottom: 12 }}>
-                  <div
-                    style={{
-                      width: 22, height: 22, borderRadius: "50%",
-                      background: "#3B82F620", color: "#3B82F6",
-                      fontSize: 11, fontWeight: 600,
-                      display: "flex", alignItems: "center", justifyContent: "center",
-                      flexShrink: 0, marginTop: 2,
-                    }}
-                  >
-                    {i + 1}
+              <div style={{ maxHeight: 300, overflowY: "auto", paddingRight: 4 }}>
+                {a.keyArgs.map((arg, i) => (
+                  <div key={i} style={{ display: "flex", gap: 10, marginBottom: 12 }}>
+                    <div
+                      style={{
+                        width: 22, height: 22, borderRadius: "50%",
+                        background: "#3B82F620", color: "#3B82F6",
+                        fontSize: 11, fontWeight: 600,
+                        display: "flex", alignItems: "center", justifyContent: "center",
+                        flexShrink: 0, marginTop: 2,
+                      }}
+                    >
+                      {i + 1}
+                    </div>
+                    <div style={{ fontSize: 13, color: "#D1D5DB", lineHeight: 1.6 }}>{arg}</div>
                   </div>
-                  <div style={{ fontSize: 13, color: "#D1D5DB", lineHeight: 1.6 }}>{arg}</div>
-                </div>
-              ))}
+                ))}
+              </div>
             </Card>
           )}
 
@@ -350,9 +489,9 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
       {a.nextSteps?.length > 0 && (
         <Card style={{ marginBottom: 14 }}>
           <SectionLabel>Next Steps</SectionLabel>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6px 24px" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
             {a.nextSteps.map((s, i) => (
-              <div key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start", padding: "6px 0" }}>
+              <div key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start", padding: "5px 0" }}>
                 <div
                   style={{
                     width: 22, height: 22, borderRadius: "50%",
@@ -421,6 +560,48 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
           </div>
         ) : null}
       </Card>
+
+      {/* ── External Review ───────────────────────────────────────────────────── */}
+      {denial.status === "Upheld" && (
+        <Card style={{ marginBottom: 14, borderColor: "#F9731640" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: showExtReview ? 16 : 0 }}>
+            <div>
+              <SectionLabel style={{ marginBottom: 4, color: "#F97316" }}>External Review Available</SectionLabel>
+              <div style={{ fontSize: 13, color: "#9CA3AF" }}>Your internal appeal was upheld. You have a federal right to independent external review under ACA § 2719.</div>
+            </div>
+            <div style={{ display: "flex", gap: 8, flexShrink: 0, marginLeft: 16 }}>
+              {extReview && !genExtReview && (
+                <>
+                  <Btn variant="ghost" onClick={() => navigator.clipboard.writeText(extReview)} style={{ padding: "5px 12px", fontSize: 12 }}>Copy</Btn>
+                  <Btn variant="ghost" onClick={downloadExtReview} style={{ padding: "5px 12px", fontSize: 12 }}>Download</Btn>
+                </>
+              )}
+              <Btn
+                onClick={genExtReview ? undefined : handleGenExtReview}
+                loading={genExtReview}
+                style={{ padding: "5px 14px", fontSize: 12, background: "#F97316", color: "#fff", border: "none" }}
+              >
+                {extReview ? "Regenerate" : "Generate External Review Letter"}
+              </Btn>
+            </div>
+          </div>
+          {showExtReview && (
+            <>
+              {genExtReview && (
+                <div style={{ display: "flex", alignItems: "center", gap: 10, padding: 14, background: "#070c18", borderRadius: 8, color: "#6B7280", fontSize: 13, marginBottom: 12 }}>
+                  <Spinner size={13} />
+                  Drafting external review request…
+                </div>
+              )}
+              {extReview && (
+                <div style={{ background: "#070c18", border: "1px solid #1a2640", borderRadius: 10, padding: "20px 24px", fontFamily: "'IBM Plex Mono', monospace", fontSize: 12.5, lineHeight: 1.9, color: "#c9d1d9", whiteSpace: "pre-wrap", maxHeight: 400, overflowY: "auto" }}>
+                  {extReview}
+                </div>
+              )}
+            </>
+          )}
+        </Card>
+      )}
 
       {/* ── Action Timeline ───────────────────────────────────────────────────── */}
       {timelineEntries.length > 0 && (

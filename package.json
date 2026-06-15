@@ -1,10 +1,10 @@
 {
-  "name": "coverfight",
+  "name": "appealthedenial",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently -n server,vite -c cyan,magenta \"nodemon server.cjs\" \"vite\"",
+    "dev": "npx --yes kill-port 3001 5173 5174 5175 && concurrently -n server,vite -c cyan,magenta \"nodemon server.cjs\" \"vite\"",
     "server": "nodemon server.cjs",
     "build": "vite build",
     "lint": "eslint .",
@@ -13,9 +13,11 @@
   "dependencies": {
     "better-sqlite3": "^12.10.0",
     "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "multer": "^2.1.1",
     "nodemailer": "^8.0.7",
+    "pptxgenjs": "^4.0.1",
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
   },

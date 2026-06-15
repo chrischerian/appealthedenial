@@ -30,7 +30,7 @@ export default function Success({ email, navigate }) {
       </div>
 
       <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: 3, textTransform: "uppercase", color: "#3B82F6", marginBottom: 16 }}>
-        CoverFight
+            AppealTheDenial
       </div>
 
       <h1 style={{ fontSize: 42, fontWeight: 700, letterSpacing: -1, marginBottom: 16, color: "#EFF6FF" }}>

@@ -5,9 +5,6 @@ import IntakeWizard from "./IntakeWizard.jsx";
 import RightsGuide from "./RightsGuide.jsx";
 import * as api from "../api.js";
 
-const PASSWORD = "coverfight2024";
-const SESSION_KEY = "cf_admin_auth";
-
 const NAV = [
   { key: "dashboard", label: "Cases",  icon: "▦" },
   { key: "rights",    label: "Rights", icon: "⚖" },
@@ -18,15 +15,21 @@ function PasswordGate({ onAuth }) {
   const [pw, setPw] = useState("");
   const [error, setError] = useState("");
   const [shake, setShake] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const attempt = () => {
-    if (pw === PASSWORD) {
-      sessionStorage.setItem(SESSION_KEY, "1");
+  const attempt = async () => {
+    if (!pw.trim()) return;
+    setLoading(true);
+    try {
+      const { token } = await api.adminLogin(pw);
+      api.setAdminToken(token);
       onAuth();
-    } else {
+    } catch {
       setError("Incorrect password.");
       setShake(true);
       setTimeout(() => setShake(false), 500);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -59,7 +62,7 @@ function PasswordGate({ onAuth }) {
 
         <div style={{ textAlign: "center", marginBottom: 32 }}>
           <div style={{ fontSize: 13, fontWeight: 600, letterSpacing: 3, textTransform: "uppercase", color: "#3B82F6", marginBottom: 10 }}>
-            CoverFight
+            AppealTheDenial
           </div>
           <div style={{ fontSize: 20, fontWeight: 600, color: "#EFF6FF" }}>Admin Access</div>
         </div>
@@ -82,20 +85,21 @@ function PasswordGate({ onAuth }) {
           )}
           <button
             onClick={attempt}
+            disabled={loading}
             style={{
               width: "100%",
-              background: "#3B82F6",
-              color: "#fff",
+              background: loading ? "#1a2640" : "#3B82F6",
+              color: loading ? "#4B5563" : "#fff",
               border: "none",
               borderRadius: 8,
               padding: "12px 0",
               fontSize: 14,
               fontWeight: 600,
-              cursor: "pointer",
+              cursor: loading ? "not-allowed" : "pointer",
               fontFamily: "inherit",
             }}
           >
-            Sign In
+            {loading ? "Checking…" : "Sign In"}
           </button>
         </div>
       </div>
@@ -105,7 +109,7 @@ function PasswordGate({ onAuth }) {
 
 // ── Admin shell ───────────────────────────────────────────────────────────────
 export default function Admin({ navigate }) {
-  const [authed, setAuthed] = useState(() => sessionStorage.getItem(SESSION_KEY) === "1");
+  const [authed, setAuthed] = useState(() => !!api.getAdminToken());
   const [view, setView] = useState("dashboard");
   const [cases, setCases] = useState([]);
   const [activeCase, setActiveCase] = useState(null);
@@ -140,7 +144,7 @@ export default function Admin({ navigate }) {
   };
 
   const signOut = () => {
-    sessionStorage.removeItem(SESSION_KEY);
+    api.clearAdminToken();
     setAuthed(false);
   };
 
@@ -159,7 +163,7 @@ export default function Admin({ navigate }) {
         }}
       >
         <div style={{ padding: "0 8px 24px", borderBottom: "1px solid #1a2640", marginBottom: 20 }}>
-          <div style={{ fontSize: 15, fontWeight: 600, color: "#EFF6FF" }}>CoverFight</div>
+          <div style={{ fontSize: 15, fontWeight: 600, color: "#EFF6FF" }}>AppealTheDenial</div>
           <div style={{ fontSize: 11, color: "#2a3a52", marginTop: 3 }}>Admin Dashboard</div>
         </div>
 

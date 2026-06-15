@@ -1,17 +1,6 @@
 import { useState, useEffect } from "react";
 import { getStatus } from "../api.js";
-
-const STATUS_MAP = {
-  Processing: { label: "In Progress",       color: "#8B5CF6", step: 1, msg: "We're analyzing your denial and building your appeal strategy." },
-  Analyzing:  { label: "In Progress",       color: "#8B5CF6", step: 1, msg: "Analyzing your denial and calculating your chances." },
-  "Appeal Drafted": { label: "In Progress", color: "#F59E0B", step: 2, msg: "Your appeal letter is being finalized." },
-  "Letter Sent":    { label: "Letter Sent", color: "#10B981", step: 3, msg: "Your appeal letter has been emailed to you. Check your inbox." },
-  "Following Up":   { label: "Following Up",color: "#F97316", step: 3, msg: "Your letter was sent. We're monitoring for a response." },
-  Reversed:  { label: "Won",    color: "#10B981", step: 4, msg: "Your denial was reversed. The appeal worked." },
-  Upheld:    { label: "Upheld", color: "#EF4444", step: 3, msg: "The internal appeal was upheld. Consider requesting an external review." },
-  Escalated: { label: "Escalated", color: "#EF4444", step: 3, msg: "This case has been escalated for further review." },
-  Error:     { label: "Error", color: "#EF4444", step: 0, msg: "Something went wrong. Please contact support." },
-};
+import { STATUS_MAP, fmtDate } from "../components/ui.jsx";
 
 const STEPS = ["Received", "Analyzing", "Letter Sent", "Done"];
 
@@ -74,7 +63,7 @@ export default function Status({ email: initialEmail, navigate }) {
       <div style={{ width: "100%", maxWidth: 520 }}>
         {/* Logo */}
         <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: 3, textTransform: "uppercase", color: "#3B82F6", marginBottom: 40, textAlign: "center" }}>
-          CoverFight
+            AppealTheDenial
         </div>
 
         <h2 style={{ fontSize: 26, fontWeight: 700, letterSpacing: -0.5, marginBottom: 8, color: "#EFF6FF" }}>
@@ -199,8 +188,3 @@ export default function Status({ email: initialEmail, navigate }) {
   );
 }
 
-function fmtDate(str) {
-  try {
-    return new Date(str.includes("T") ? str : str + "Z").toLocaleDateString("en-US", { month: "short", day: "numeric" });
-  } catch { return ""; }
-}

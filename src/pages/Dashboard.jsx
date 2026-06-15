@@ -1,6 +1,13 @@
-import { Badge, Btn, Card, SectionLabel, STATUS_COLORS } from "../components/ui.jsx";
+import { Badge, Btn, Card, SectionLabel, STATUS_COLORS, SENT_STATUSES, CATEGORY_META, fmtDate } from "../components/ui.jsx";
 
-const SENT_STATUSES = new Set(["Letter Sent", "Following Up", "Reversed", "Upheld", "Escalated"]);
+// Fixed min-width table — scrolls horizontally on narrow screens
+const TABLE_MIN = 520;
+const COLS = "minmax(140px, 1fr) 100px 70px 130px 80px 16px";
+
+function daysUntil(dateStr) {
+  if (!dateStr) return null;
+  return Math.ceil((new Date(dateStr) - new Date()) / 86400000);
+}
 
 export default function Dashboard({ cases, loading, onNewCase, onOpenCase }) {
   const total       = cases.length;
@@ -9,10 +16,10 @@ export default function Dashboard({ cases, loading, onNewCase, onOpenCase }) {
   const totalAmount = cases.reduce((s, c) => s + (Number(c.amount) || 0), 0);
 
   const stats = [
-    { label: "Total Cases",      value: total,                                                color: "#3B82F6" },
-    { label: "Letters Sent",     value: lettersSent,                                          color: "#10B981" },
-    { label: "Wins",             value: wins,                                                 color: "#10B981" },
-    { label: "$ in Dispute",     value: totalAmount ? `$${totalAmount.toLocaleString()}` : "$0", color: "#F59E0B" },
+    { label: "Total Cases",  value: total,                                                    color: "#3B82F6" },
+    { label: "Letters Sent", value: lettersSent,                                              color: "#10B981" },
+    { label: "Wins",         value: wins,                                                     color: "#10B981" },
+    { label: "$ Disputed",   value: totalAmount ? `$${totalAmount.toLocaleString()}` : "$0",  color: "#F59E0B" },
   ];
 
   return (
@@ -23,20 +30,20 @@ export default function Dashboard({ cases, loading, onNewCase, onOpenCase }) {
           <h1 style={{ fontSize: 24, fontWeight: 600, marginBottom: 4 }}>Cases</h1>
           <p style={{ color: "#6B7280", fontSize: 14 }}>All customer submissions</p>
         </div>
-        <Btn onClick={onNewCase} style={{ padding: "9px 20px" }}>+ Add Case</Btn>
+        <Btn onClick={onNewCase} style={{ padding: "9px 20px", flexShrink: 0 }}>+ Add Case</Btn>
       </div>
 
-      {/* Stats */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12, marginBottom: 32 }}>
+      {/* Stats — 2-col on small, 4-col on wide */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(110px, 1fr))", gap: 10, marginBottom: 28 }}>
         {stats.map((s) => (
-          <Card key={s.label}>
-            <SectionLabel>{s.label}</SectionLabel>
-            <div style={{ fontSize: 30, fontWeight: 700, color: s.color }}>{s.value}</div>
+          <Card key={s.label} style={{ padding: "14px 16px" }}>
+            <SectionLabel style={{ marginBottom: 4 }}>{s.label}</SectionLabel>
+            <div style={{ fontSize: 26, fontWeight: 700, color: s.color }}>{s.value}</div>
           </Card>
         ))}
       </div>
 
-      {/* Case list */}
+      {/* Case list — horizontally scrollable on narrow viewports */}
       {loading ? (
         <div style={{ textAlign: "center", padding: "60px 20px", color: "#4B5563" }}>Loading…</div>
       ) : cases.length === 0 ? (
@@ -46,33 +53,35 @@ export default function Dashboard({ cases, loading, onNewCase, onOpenCase }) {
           <Btn onClick={onNewCase}>Add Case Manually</Btn>
         </Card>
       ) : (
-        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-          {/* Table header */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 140px 140px 90px 70px 36px",
-              gap: 12,
-              padding: "0 16px 10px",
-              fontSize: 11,
-              color: "#4B5563",
-              textTransform: "uppercase",
-              letterSpacing: 1,
-              borderBottom: "1px solid #1a2640",
-              marginBottom: 4,
-            }}
-          >
-            <div>Procedure / Patient</div>
-            <div>Insurer</div>
-            <div>Submitted</div>
-            <div>Amount</div>
-            <div>Status</div>
-            <div />
-          </div>
+        <div style={{ overflowX: "auto" }}>
+          <div style={{ minWidth: TABLE_MIN, display: "flex", flexDirection: "column", gap: 8 }}>
+            {/* Table header */}
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: COLS,
+                gap: 10,
+                padding: "0 14px 10px",
+                fontSize: 11,
+                color: "#4B5563",
+                textTransform: "uppercase",
+                letterSpacing: 1,
+                borderBottom: "1px solid #1a2640",
+                marginBottom: 4,
+              }}
+            >
+              <div>Procedure / Patient</div>
+              <div>Insurer</div>
+              <div>Amount</div>
+              <div>Status</div>
+              <div>Deadline</div>
+              <div />
+            </div>
 
-          {cases.map((c) => (
-            <CaseRow key={c.id} c={c} onClick={() => onOpenCase(c)} />
-          ))}
+            {cases.map((c) => (
+              <CaseRow key={c.id} c={c} onClick={() => onOpenCase(c)} />
+            ))}
+          </div>
         </div>
       )}
     </div>
@@ -80,22 +89,24 @@ export default function Dashboard({ cases, loading, onNewCase, onOpenCase }) {
 }
 
 function CaseRow({ c, onClick }) {
-  const email = c.notes?.patientEmail || "";
-  const label = c.patient_name || email || "Unknown";
-  const submitted = c.created_at
-    ? new Date(c.created_at.includes("T") ? c.created_at : c.created_at + "Z")
-        .toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
-    : "—";
+  const email     = c.notes?.patientEmail || c.patient_email || "";
+  const label     = c.patient_name || email || "Unknown";
+  const submitted = fmtDate(c.created_at);
+  const days      = daysUntil(c.appeal_deadline);
+  const deadlineResolved = SENT_STATUSES.has(c.status);
+  const deadlineColor = !deadlineResolved && days !== null
+    ? days <= 3 ? "#EF4444" : days <= 7 ? "#F59E0B" : "#4B5563"
+    : "#374151";
 
   return (
     <div
       onClick={onClick}
       style={{
         display: "grid",
-        gridTemplateColumns: "1fr 140px 140px 90px 70px 36px",
-        gap: 12,
+        gridTemplateColumns: COLS,
+        gap: 10,
         alignItems: "center",
-        padding: "14px 16px",
+        padding: "13px 14px",
         background: "#0f1827",
         border: "1px solid #1a2640",
         borderRadius: 10,
@@ -105,13 +116,13 @@ function CaseRow({ c, onClick }) {
       onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#2a4a7a"; e.currentTarget.style.background = "#111f35"; }}
       onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#1a2640"; e.currentTarget.style.background = "#0f1827"; }}
     >
-      {/* Procedure + patient */}
+      {/* Procedure + patient + date */}
       <div style={{ minWidth: 0 }}>
         <div style={{ fontWeight: 500, color: "#EFF6FF", fontSize: 14, marginBottom: 2, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
           {c.procedure || "—"}
         </div>
         <div style={{ fontSize: 12, color: "#6B7280", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-          {label}
+          {label}{submitted ? <span style={{ color: "#2a3a52", marginLeft: 8 }}>{submitted}</span> : null}
         </div>
       </div>
 
@@ -120,17 +131,30 @@ function CaseRow({ c, onClick }) {
         {c.insurer || "—"}
       </div>
 
-      {/* Date */}
-      <div style={{ fontSize: 12, color: "#6B7280" }}>{submitted}</div>
-
       {/* Amount */}
       <div style={{ fontSize: 13, fontWeight: 600, color: c.amount ? "#F59E0B" : "#374151" }}>
         {c.amount ? `$${Number(c.amount).toLocaleString()}` : "—"}
       </div>
 
-      {/* Status badge */}
-      <div>
+      {/* Status + category badges */}
+      <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
         <Badge color={STATUS_COLORS[c.status] || "#6B7280"}>{c.status}</Badge>
+        {c.denial_category && CATEGORY_META[c.denial_category] && (
+          <Badge color={CATEGORY_META[c.denial_category].color}>
+            {CATEGORY_META[c.denial_category].label}
+          </Badge>
+        )}
+      </div>
+
+      {/* Deadline */}
+      <div style={{ fontSize: 12, color: deadlineColor, fontWeight: days !== null && days <= 7 && !deadlineResolved ? 600 : 400 }}>
+        {c.appeal_deadline
+          ? deadlineResolved
+            ? <span style={{ color: "#374151" }}>Filed</span>
+            : days !== null && days >= 0
+              ? `${days}d left`
+              : <span style={{ color: "#EF4444" }}>Overdue</span>
+          : <span style={{ color: "#2a3a52" }}>—</span>}
       </div>
 
       {/* Arrow */}

@@ -1,19 +1,64 @@
 // Shared UI primitives
 
 export const STATUS_COLORS = {
-  Processing: "#8B5CF6",
-  New: "#3B82F6",
-  Analyzing: "#8B5CF6",
-  "Appeal Drafted": "#F59E0B",
-  "Letter Sent": "#10B981",
-  "Following Up": "#F97316",
-  Reversed: "#10B981",
-  Upheld: "#EF4444",
-  Escalated: "#EF4444",
-  Error: "#EF4444",
+  Processing:               "#8B5CF6",
+  New:                      "#3B82F6",
+  Analyzing:                "#8B5CF6",
+  "Info Needed":            "#F59E0B",
+  "Appeal Drafted":         "#F59E0B",
+  "Letter Ready":           "#3B82F6",
+  "Letter Sent":            "#10B981",
+  "Provider Action Needed": "#F97316",
+  "Following Up":           "#F97316",
+  Reversed:                 "#10B981",
+  Upheld:                   "#EF4444",
+  Escalated:                "#EF4444",
+  Error:                    "#EF4444",
+};
+
+// Denial category display metadata
+export const CATEGORY_META = {
+  medical_necessity: { label: "Medical Necessity", color: "#3B82F6" },
+  experimental:      { label: "Experimental",      color: "#8B5CF6" },
+  prior_auth:        { label: "Prior Auth",         color: "#8B5CF6" },
+  plan_exclusion:    { label: "Plan Exclusion",     color: "#F97316" },
+  out_of_network:    { label: "Out of Network",     color: "#14B8A6" },
+  billing_error:     { label: "Billing Error",      color: "#F59E0B" },
+  late_filing:       { label: "Late Filing",        color: "#6B7280" },
+  eligibility:       { label: "Eligibility",        color: "#6B7280" },
 };
 
 export const STATUSES = Object.keys(STATUS_COLORS);
+
+// Statuses that represent a letter having been produced/sent
+export const SENT_STATUSES = new Set([
+  "Letter Ready", "Letter Sent", "Provider Action Needed",
+  "Following Up", "Reversed", "Upheld", "Escalated",
+]);
+
+// Shared date formatter — handles both "2024-01-15 10:00:00" and ISO strings
+export function fmtDate(str, opts = { month: "short", day: "numeric", year: "numeric" }) {
+  if (!str) return "—";
+  try {
+    return new Date(str.includes("T") ? str : str + "Z").toLocaleDateString("en-US", opts);
+  } catch { return "—"; }
+}
+
+// Customer-facing status map — single source of truth
+export const STATUS_MAP = {
+  Processing:       { label: "In Progress",    color: "#8B5CF6", step: 1, msg: "We're analyzing your denial and building your appeal strategy." },
+  Analyzing:        { label: "In Progress",    color: "#8B5CF6", step: 1, msg: "Analyzing your denial and calculating your chances." },
+  "Info Needed":    { label: "Info Needed",    color: "#F59E0B", step: 1, msg: "We need a few more details to draft your letter. Check your email for our request." },
+  "Appeal Drafted": { label: "In Progress",    color: "#F59E0B", step: 2, msg: "Your appeal letter is being finalized." },
+  "Letter Ready":   { label: "Letter Ready",   color: "#3B82F6", step: 2, msg: "Your appeal letter is ready and has been emailed to you." },
+  "Letter Sent":    { label: "Filed",          color: "#10B981", step: 3, msg: "Your appeal has been filed with your insurance company." },
+  "Provider Action Needed": { label: "Provider Notified", color: "#F97316", step: 2, msg: "Your provider's billing office has been notified. They need to resubmit a corrected claim." },
+  "Following Up":   { label: "Following Up",   color: "#F97316", step: 3, msg: "Your letter was sent. We're monitoring for a response." },
+  Reversed:         { label: "Won",            color: "#10B981", step: 4, msg: "Your denial was reversed. The appeal worked." },
+  Upheld:           { label: "Upheld",         color: "#EF4444", step: 3, msg: "The internal appeal was upheld. Consider requesting an external review." },
+  Escalated:        { label: "Escalated",      color: "#EF4444", step: 3, msg: "This case has been escalated for further review." },
+  Error:            { label: "Error",          color: "#EF4444", step: 0, msg: "Something went wrong. Please contact support." },
+};
 
 export const INSURERS = [
   "UnitedHealth", "Anthem/BCBS", "Cigna", "Aetna", "Humana",
