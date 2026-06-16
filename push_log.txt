@@ -1,5 +1,4 @@
-[master 0fc30d2] Add provider homepage at /, move patient tool to /patients
- 3 files changed, 266 insertions(+), 4 deletions(-)
- create mode 100644 src/pages/OutreachLanding.jsx
+[master 784d42a] Add provider homepage at /, move patient tool to /patients
+ 2 files changed, 5 insertions(+), 11 deletions(-)
 To https://github.com/chrischerian/appealthedenial.git
-   dfd0d36..0fc30d2  HEAD -> master
+   0fc30d2..784d42a  HEAD -> master
