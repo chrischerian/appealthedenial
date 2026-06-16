@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import "./index.css";
 import ProviderLanding from "./pages/ProviderLanding.jsx";
+import OutreachLanding from "./pages/OutreachLanding.jsx";
 import Landing from "./pages/Landing.jsx";
 import Submit from "./pages/Submit.jsx";
 import Success from "./pages/Success.jsx";
@@ -37,12 +38,14 @@ export default function App() {
              : path === "/status"         ? "status"
              : path === "/update"         ? "update"
              : path === "/patients"       ? "patients"
+             : path === "/hello"          ? "hello"
              :                             "provider";
 
   return (
     <>
       <div className="fade-in" key={page}>
-        {page === "provider"  && <ProviderLanding navigate={navigate} />}
+        {page === "provider"  && <ProviderLanding  navigate={navigate} />}
+        {page === "hello"     && <OutreachLanding  navigate={navigate} />}
         {page === "patients"  && <Landing         navigate={navigate} />}
         {page === "submit"    && <Submit          navigate={navigate} />}
         {page === "success"   && <Success         navigate={navigate} email={params.get("email")} />}
