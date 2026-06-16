@@ -212,9 +212,8 @@ export default function OutreachLanding({ navigate }) {
             background: "#fff", borderRadius: 16, overflow: "hidden",
             minHeight: 680, boxShadow: `0 0 60px ${blueGlow}`,
           }}>
-            {/* ✏️ Replace YOUR-CALENDLY-LINK-HERE with your Calendly URL */}
             <iframe
-              src="https://calendly.com/YOUR-CALENDLY-LINK-HERE?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=3b82f6&embed_type=Inline"
+              src="https://calendar.app.google/oAf4wKTQLa8UxSUF6"
               width="100%"
               height="680"
               frameBorder="0"
