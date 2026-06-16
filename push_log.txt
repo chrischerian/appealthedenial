@@ -1,4 +1,6 @@
-[master 6138c2b] Rebrand CoverFight to AppealTheDenial (appealthedenial.com)
- 1 file changed, 4 insertions(+), 2 deletions(-)
+[master fd9a973] Add GitHub Pages deploy workflow
+ 3 files changed, 47 insertions(+), 2 deletions(-)
+ create mode 100644 .github/workflows/deploy.yml
+ create mode 100644 push_log.txt
 To https://github.com/chrischerian/appealthedenial.git
-   d5fe21c..6138c2b  HEAD -> master
+   6138c2b..fd9a973  HEAD -> master
