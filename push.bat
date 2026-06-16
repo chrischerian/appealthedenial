@@ -4,9 +4,8 @@ git config user.email "willjhooper@msn.com"
 git config user.name "Will Hooper"
 git remote set-url origin https://github.com/chrischerian/appealthedenial.git
 git add -A
-git commit -m "Rebrand CoverFight to AppealTheDenial (appealthedenial.com)" > "%~dp0push_log.txt" 2>&1
+git commit -m "Add GitHub Pages deploy workflow" > "%~dp0push_log.txt" 2>&1
 git push origin HEAD >> "%~dp0push_log.txt" 2>&1
-echo.
 type "%~dp0push_log.txt"
 echo.
 echo Done! Press any key to close.

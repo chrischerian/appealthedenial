@@ -1,0 +1,4 @@
+[master 6138c2b] Rebrand CoverFight to AppealTheDenial (appealthedenial.com)
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+To https://github.com/chrischerian/appealthedenial.git
+   d5fe21c..6138c2b  HEAD -> master
