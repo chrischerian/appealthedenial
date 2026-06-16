@@ -1,6 +1,4 @@
-[master fd9a973] Add GitHub Pages deploy workflow
- 3 files changed, 47 insertions(+), 2 deletions(-)
- create mode 100644 .github/workflows/deploy.yml
- create mode 100644 push_log.txt
+[master 6535b55] Add GitHub Pages deploy workflow
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 To https://github.com/chrischerian/appealthedenial.git
-   6138c2b..fd9a973  HEAD -> master
+   fd9a973..6535b55  HEAD -> master

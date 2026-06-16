@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import "./index.css";
+import ProviderLanding from "./pages/ProviderLanding.jsx";
 import Landing from "./pages/Landing.jsx";
 import Submit from "./pages/Submit.jsx";
 import Success from "./pages/Success.jsx";
@@ -35,17 +36,19 @@ export default function App() {
              : path === "/success"        ? "success"
              : path === "/status"         ? "status"
              : path === "/update"         ? "update"
-             :                             "landing";
+             : path === "/patients"       ? "patients"
+             :                             "provider";
 
   return (
     <>
       <div className="fade-in" key={page}>
-        {page === "landing"  && <Landing    navigate={navigate} />}
-        {page === "submit"   && <Submit     navigate={navigate} />}
-        {page === "success"  && <Success    navigate={navigate} email={params.get("email")} />}
-        {page === "status"   && <Status     navigate={navigate} email={params.get("email")} />}
-        {page === "update"   && <UpdateInfo navigate={navigate} token={params.get("token")} />}
-        {page === "admin"    && <Admin      navigate={navigate} />}
+        {page === "provider"  && <ProviderLanding navigate={navigate} />}
+        {page === "patients"  && <Landing         navigate={navigate} />}
+        {page === "submit"    && <Submit          navigate={navigate} />}
+        {page === "success"   && <Success         navigate={navigate} email={params.get("email")} />}
+        {page === "status"    && <Status          navigate={navigate} email={params.get("email")} />}
+        {page === "update"    && <UpdateInfo      navigate={navigate} token={params.get("token")} />}
+        {page === "admin"     && <Admin           navigate={navigate} />}
       </div>
     </>
   );

@@ -4,7 +4,7 @@ git config user.email "willjhooper@msn.com"
 git config user.name "Will Hooper"
 git remote set-url origin https://github.com/chrischerian/appealthedenial.git
 git add -A
-git commit -m "Add GitHub Pages deploy workflow" > "%~dp0push_log.txt" 2>&1
+git commit -m "Add provider homepage at /, move patient tool to /patients" > "%~dp0push_log.txt" 2>&1
 git push origin HEAD >> "%~dp0push_log.txt" 2>&1
 type "%~dp0push_log.txt"
 echo.
