@@ -75,8 +75,8 @@ export default function OutreachLanding({ navigate }) {
   const bg2      = "#070c18";
   const card     = "#0f1827";
   const border   = "#1a2640";
-  const blue     = "#3B82F6";
-  const blueGlow = "#3B82F650";
+  const blue     = "#10b981";
+  const blueGlow = "#10b98150";
   const textHi   = "#EFF6FF";
   const textMid  = "#9CA3AF";
   const textLow  = "#6B7280";
@@ -112,8 +112,8 @@ export default function OutreachLanding({ navigate }) {
       <section style={{ maxWidth: 760, margin: "0 auto", padding: "100px 24px 80px", textAlign: "center" }}>
         <div style={{
           display: "inline-block",
-          background: "#3B82F61a", color: blue,
-          border: `1px solid #3B82F63a`,
+          background: "#10b9811a", color: blue,
+          border: `1px solid #10b9813a`,
           borderRadius: 100, padding: "5px 16px",
           fontSize: 12, fontWeight: 600, letterSpacing: 1,
           textTransform: "uppercase", marginBottom: 28,
@@ -150,7 +150,7 @@ export default function OutreachLanding({ navigate }) {
             textDecoration: "none",
             boxShadow: `0 0 40px ${blueGlow}`,
           }}
-          onMouseEnter={e => { e.currentTarget.style.background = "#2563EB"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+          onMouseEnter={e => { e.currentTarget.style.background = "#059669"; e.currentTarget.style.transform = "translateY(-2px)"; }}
           onMouseLeave={e => { e.currentTarget.style.background = blue; e.currentTarget.style.transform = "none"; }}
         >
           Book a 20-min call →
@@ -303,7 +303,7 @@ export default function OutreachLanding({ navigate }) {
           Appeal<span style={{ color: blue }}>TheDenial</span>
         </div>
         <button
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/providers")}
           style={{ background: "none", border: "none", cursor: "pointer", fontSize: 13, color: "#4B5563", fontFamily: "inherit" }}
         >
           For providers →

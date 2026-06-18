@@ -41,7 +41,7 @@ export default function ProviderLanding({ navigate }) {
         }}
       >
         <div style={{ fontSize: 15, fontWeight: 700, letterSpacing: -0.3, color: "#EFF6FF" }}>
-          Appeal<span style={{ color: "#3B82F6" }}>TheDenial</span>
+          Appeal<span style={{ color: "#10b981" }}>TheDenial</span>
         </div>
         <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
           <button
@@ -52,7 +52,7 @@ export default function ProviderLanding({ navigate }) {
               fontSize: 14, cursor: "pointer", fontFamily: "inherit",
               transition: "border-color 0.15s, color 0.15s",
             }}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#3B82F6"; e.currentTarget.style.color = "#EFF6FF"; }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#10b981"; e.currentTarget.style.color = "#EFF6FF"; }}
             onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#1a2640"; e.currentTarget.style.color = "#9CA3AF"; }}
           >
             For patients
@@ -60,7 +60,7 @@ export default function ProviderLanding({ navigate }) {
           <a
             href="mailto:willjhooper@msn.com"
             style={{
-              background: "#3B82F6", color: "#fff", border: "none",
+              background: "#10b981", color: "#fff", border: "none",
               borderRadius: 8, padding: "8px 18px",
               fontSize: 14, fontWeight: 600, cursor: "pointer",
               fontFamily: "inherit", textDecoration: "none",
@@ -82,8 +82,8 @@ export default function ProviderLanding({ navigate }) {
         <div
           style={{
             display: "inline-block",
-            background: "#3B82F61a", color: "#3B82F6",
-            border: "1px solid #3B82F63a",
+            background: "#10b9811a", color: "#10b981",
+            border: "1px solid #10b9813a",
             borderRadius: 100, padding: "5px 16px",
             fontSize: 12, fontWeight: 600, letterSpacing: 1,
             textTransform: "uppercase", marginBottom: 28,
@@ -102,7 +102,7 @@ export default function ProviderLanding({ navigate }) {
         >
           We handle every insurance
           <br />
-          <span style={{ color: "#3B82F6" }}>denial your patients receive.</span>
+          <span style={{ color: "#10b981" }}>denial your patients receive.</span>
         </h1>
 
         <p
@@ -119,15 +119,15 @@ export default function ProviderLanding({ navigate }) {
           href="mailto:willjhooper@msn.com"
           style={{
             display: "inline-block",
-            background: "#3B82F6", color: "#fff", border: "none",
+            background: "#10b981", color: "#fff", border: "none",
             borderRadius: 12, padding: "18px 44px",
             fontSize: 17, fontWeight: 600, cursor: "pointer",
             letterSpacing: -0.2, fontFamily: "inherit", textDecoration: "none",
-            boxShadow: "0 0 40px #3B82F640",
+            boxShadow: "0 0 40px #10b98140",
             transition: "background 0.15s, transform 0.1s",
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.background = "#2563EB"; e.currentTarget.style.transform = "translateY(-2px)"; }}
-          onMouseLeave={(e) => { e.currentTarget.style.background = "#3B82F6"; e.currentTarget.style.transform = "none"; }}
+          onMouseEnter={(e) => { e.currentTarget.style.background = "#059669"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.background = "#10b981"; e.currentTarget.style.transform = "none"; }}
         >
           Get in touch →
         </a>
@@ -136,7 +136,7 @@ export default function ProviderLanding({ navigate }) {
       {/* ── How it works ─────────────────────────────────────────────────────── */}
       <section style={{ maxWidth: 900, margin: "0 auto", padding: "96px 24px" }}>
         <div style={{ textAlign: "center", marginBottom: 56 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: 3, textTransform: "uppercase", color: "#3B82F6", marginBottom: 12 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: 3, textTransform: "uppercase", color: "#10b981", marginBottom: 12 }}>
             How it works
           </div>
           <h2 style={{ fontSize: "clamp(28px, 4vw, 40px)", fontWeight: 700, letterSpacing: -1, color: "#EFF6FF" }}>
@@ -153,7 +153,7 @@ export default function ProviderLanding({ navigate }) {
                 borderRadius: 16, padding: "28px 24px",
               }}
             >
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: "#3B82F6", marginBottom: 16, textTransform: "uppercase" }}>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: "#10b981", marginBottom: 16, textTransform: "uppercase" }}>
                 Step {item.step}
               </div>
               <div style={{ fontSize: 17, fontWeight: 600, color: "#EFF6FF", marginBottom: 10, lineHeight: 1.3 }}>
@@ -169,7 +169,7 @@ export default function ProviderLanding({ navigate }) {
       <section style={{ background: "#070c18", borderTop: "1px solid #0f1827", borderBottom: "1px solid #0f1827" }}>
         <div style={{ maxWidth: 900, margin: "0 auto", padding: "80px 24px" }}>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
-            <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: 3, textTransform: "uppercase", color: "#3B82F6", marginBottom: 12 }}>
+            <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: 3, textTransform: "uppercase", color: "#10b981", marginBottom: 12 }}>
               What we handle
             </div>
             <h2 style={{ fontSize: "clamp(26px, 4vw, 36px)", fontWeight: 700, letterSpacing: -1, color: "#EFF6FF" }}>
@@ -189,8 +189,8 @@ export default function ProviderLanding({ navigate }) {
                 <div
                   style={{
                     display: "inline-block",
-                    background: "#3B82F61a", color: "#3B82F6",
-                    border: "1px solid #3B82F63a",
+                    background: "#10b9811a", color: "#10b981",
+                    border: "1px solid #10b9813a",
                     borderRadius: 6, padding: "3px 10px",
                     fontSize: 12, fontWeight: 500, marginBottom: 10,
                   }}
@@ -246,12 +246,12 @@ export default function ProviderLanding({ navigate }) {
             href="mailto:willjhooper@msn.com"
             style={{
               display: "inline-block",
-              background: "#3B82F6", color: "#fff",
+              background: "#10b981", color: "#fff",
               borderRadius: 12, padding: "18px 44px",
               fontSize: 17, fontWeight: 600,
               fontFamily: "inherit", letterSpacing: -0.2,
               textDecoration: "none",
-              boxShadow: "0 0 40px #3B82F650",
+              boxShadow: "0 0 40px #10b98150",
             }}
           >
             Get in touch →
@@ -268,7 +268,7 @@ export default function ProviderLanding({ navigate }) {
         }}
       >
         <div style={{ fontSize: 13, fontWeight: 600, color: "#EFF6FF" }}>
-          Appeal<span style={{ color: "#3B82F6" }}>TheDenial</span>
+          Appeal<span style={{ color: "#10b981" }}>TheDenial</span>
         </div>
         <button
           onClick={() => navigate("/patients")}

@@ -38,14 +38,14 @@ export default function App() {
              : path === "/status"         ? "status"
              : path === "/update"         ? "update"
              : path === "/patients"       ? "patients"
-             : path === "/hello"          ? "hello"
-             :                             "provider";
+             : path === "/providers"      ? "provider"
+             :                             "home";
 
   return (
     <>
       <div className="fade-in" key={page}>
+        {page === "home"      && <OutreachLanding  navigate={navigate} />}
         {page === "provider"  && <ProviderLanding  navigate={navigate} />}
-        {page === "hello"     && <OutreachLanding  navigate={navigate} />}
         {page === "patients"  && <Landing         navigate={navigate} />}
         {page === "submit"    && <Submit          navigate={navigate} />}
         {page === "success"   && <Success         navigate={navigate} email={params.get("email")} />}
