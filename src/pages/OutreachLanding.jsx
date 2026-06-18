@@ -1,5 +1,4 @@
 // ── Cold email landing page — appealthedenial.com/hello ──────────────────────
-// To activate: swap YOUR-CALENDLY-LINK-HERE with your real Calendly URL
 
 const BENEFITS = [
   {
@@ -47,6 +46,30 @@ const STEPS = [
 ];
 
 export default function OutreachLanding({ navigate }) {
+  const [form, setForm]     = useState({ name: "", email: "" });
+  const [status, setStatus] = useState("idle"); // idle | sending | done | error
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setStatus("sending");
+    try {
+      const res = await fetch("https://formsubmit.co/ajax/will@solognecourtholdings.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name:  form.name,
+          email: form.email,
+          _subject: "New lead from AppealTheDenial.com/hello",
+          _captcha: "false",
+        }),
+      });
+      if (res.ok) setStatus("done");
+      else setStatus("error");
+    } catch {
+      setStatus("error");
+    }
+  }
+
   // ── Inline style tokens ──────────────────────────────────────────────────────
   const bg       = "#090d18";
   const bg2      = "#070c18";
@@ -197,30 +220,76 @@ export default function OutreachLanding({ navigate }) {
         </div>
       </section>
 
-      {/* ── Book a call ──────────────────────────────────────────────────────── */}
+      {/* ── Lead form ────────────────────────────────────────────────────────── */}
       <section id="book" style={{ background: bg2, borderTop: `1px solid ${border}` }}>
-        <div style={{ maxWidth: 760, margin: "0 auto", padding: "80px 24px", textAlign: "center" }}>
+        <div style={{ maxWidth: 520, margin: "0 auto", padding: "80px 24px", textAlign: "center" }}>
           <h2 style={{ fontSize: "clamp(28px, 4vw, 42px)", fontWeight: 700, letterSpacing: -1, color: textHi, marginBottom: 12 }}>
-            Let's talk — 20 minutes.
+            Let's talk.
           </h2>
           <p style={{ fontSize: 16, color: textLow, marginBottom: 40 }}>
-            No pitch deck. Just a quick call to see if we're a fit for your practice.
+            Drop your info and we'll reach out within one business day.
           </p>
 
-          {/* Calendly inline embed */}
-          <div style={{
-            background: "#fff", borderRadius: 16, overflow: "hidden",
-            minHeight: 680, boxShadow: `0 0 60px ${blueGlow}`,
-          }}>
-            <iframe
-              src="https://calendar.app.google/oAf4wKTQLa8UxSUF6"
-              width="100%"
-              height="680"
-              frameBorder="0"
-              title="Schedule a call"
-              style={{ display: "block" }}
-            />
-          </div>
+          {status === "done" ? (
+            <div style={{
+              background: card, border: "1px solid #065f46",
+              borderRadius: 16, padding: "40px 32px",
+            }}>
+              <div style={{ fontSize: 32, marginBottom: 12 }}>✓</div>
+              <div style={{ fontSize: 18, fontWeight: 600, color: textHi, marginBottom: 8 }}>You're on our list.</div>
+              <p style={{ fontSize: 14, color: textLow }}>We'll be in touch within one business day.</p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 16, textAlign: "left" }}>
+              <input
+                type="text"
+                placeholder="Your name"
+                required
+                value={form.name}
+                onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+                style={{
+                  background: card, border: `1px solid ${border}`,
+                  borderRadius: 10, padding: "14px 18px",
+                  fontSize: 15, color: textHi, fontFamily: "inherit", outline: "none",
+                }}
+                onFocus={e => { e.target.style.borderColor = blue; }}
+                onBlur={e => { e.target.style.borderColor = border; }}
+              />
+              <input
+                type="email"
+                placeholder="Work email"
+                required
+                value={form.email}
+                onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+                style={{
+                  background: card, border: `1px solid ${border}`,
+                  borderRadius: 10, padding: "14px 18px",
+                  fontSize: 15, color: textHi, fontFamily: "inherit", outline: "none",
+                }}
+                onFocus={e => { e.target.style.borderColor = blue; }}
+                onBlur={e => { e.target.style.borderColor = border; }}
+              />
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                style={{
+                  background: blue, color: "#fff", border: "none",
+                  borderRadius: 10, padding: "16px",
+                  fontSize: 16, fontWeight: 600, cursor: status === "sending" ? "wait" : "pointer",
+                  fontFamily: "inherit", letterSpacing: -0.2,
+                  boxShadow: `0 0 30px ${blueGlow}`,
+                  opacity: status === "sending" ? 0.7 : 1,
+                }}
+              >
+                {status === "sending" ? "Sending…" : "Get in touch →"}
+              </button>
+              {status === "error" && (
+                <p style={{ fontSize: 13, color: "#f87171", margin: 0, textAlign: "center" }}>
+                  Something went wrong — email us at will@solognecourtholdings.com
+                </p>
+              )}
+            </form>
+          )}
         </div>
       </section>
 

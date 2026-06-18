@@ -1,4 +1,5 @@
-[master 784d42a] Add provider homepage at /, move patient tool to /patients
- 2 files changed, 5 insertions(+), 11 deletions(-)
+[master 9d8fffb] Add provider homepage at /, move patient tool to /patients
+ 3 files changed, 36 insertions(+), 4 deletions(-)
+ create mode 100644 public/404.html
 To https://github.com/chrischerian/appealthedenial.git
-   0fc30d2..784d42a  HEAD -> master
+   784d42a..9d8fffb  HEAD -> master
