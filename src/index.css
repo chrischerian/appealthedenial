@@ -33,7 +33,7 @@ input, textarea, select {
   width: 100%;
   transition: border-color 0.2s;
 }
-input:focus, textarea:focus, select:focus { border-color: #3B82F6; }
+input:focus, textarea:focus, select:focus { border-color: #10b981; }
 textarea { resize: vertical; min-height: 80px; }
 select option { background: #0f1827; }
 
@@ -43,3 +43,31 @@ select option { background: #0f1827; }
   to   { opacity: 1; transform: translateY(0); }
 }
 .fade-in { animation: fadeIn 0.22s ease both; }
+
+/* ── Mobile responsive helpers ───────────────────────────────────────────── */
+@media (max-width: 640px) {
+  /* Nav & footer: tighten horizontal padding */
+  .mob-nav { padding-left: 20px !important; padding-right: 20px !important; }
+
+  /* Hero: reduce vertical breathing room */
+  .mob-hero { padding-top: 64px !important; padding-bottom: 52px !important; }
+
+  /* Sections: reduce vertical padding */
+  .mob-sec { padding-top: 56px !important; padding-bottom: 56px !important; }
+
+  /* CTA buttons: full-width block on mobile */
+  .mob-cta {
+    display: block !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  /* Hide secondary nav item on very small screens */
+  .mob-hide { display: none !important; }
+
+  /* Ensure grids don't overflow */
+  .mob-grid { grid-template-columns: 1fr !important; }
+}

@@ -86,7 +86,7 @@ export default function OutreachLanding({ navigate }) {
     <div style={{ fontFamily: "'DM Sans', sans-serif", background: bg, minHeight: "100vh", color: textHi }}>
 
       {/* ── Nav ──────────────────────────────────────────────────────────────── */}
-      <nav style={{
+      <nav className="mob-nav" style={{
         display: "flex", alignItems: "center", justifyContent: "space-between",
         padding: "20px 40px", borderBottom: `1px solid ${border}`,
         position: "sticky", top: 0, zIndex: 10,
@@ -97,6 +97,7 @@ export default function OutreachLanding({ navigate }) {
         </div>
         <button
           onClick={() => navigate("/patients")}
+          className="mob-hide"
           style={{
             background: "transparent", border: `1px solid ${border}`,
             color: textLow, borderRadius: 8, padding: "8px 16px",
@@ -110,7 +111,7 @@ export default function OutreachLanding({ navigate }) {
       </nav>
 
       {/* ── Hero ─────────────────────────────────────────────────────────────── */}
-      <section style={{ maxWidth: 760, margin: "0 auto", padding: "100px 24px 80px", textAlign: "center" }}>
+      <section className="mob-hero" style={{ maxWidth: 760, margin: "0 auto", padding: "100px 24px 80px", textAlign: "center" }}>
         <div style={{
           display: "inline-block",
           background: "#10b9811a", color: blue,
@@ -141,6 +142,7 @@ export default function OutreachLanding({ navigate }) {
 
         <a
           href="#book"
+          className="mob-cta"
           onClick={e => { e.preventDefault(); document.getElementById("book").scrollIntoView({ behavior: "smooth" }); }}
           style={{
             display: "inline-block",
@@ -160,7 +162,7 @@ export default function OutreachLanding({ navigate }) {
 
       {/* ── How it works ─────────────────────────────────────────────────────── */}
       <section style={{ background: bg2, borderTop: `1px solid ${border}`, borderBottom: `1px solid ${border}` }}>
-        <div style={{ maxWidth: 900, margin: "0 auto", padding: "80px 24px" }}>
+        <div className="mob-sec" style={{ maxWidth: 900, margin: "0 auto", padding: "80px 24px" }}>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: 3, textTransform: "uppercase", color: blue, marginBottom: 12 }}>
               How it works
@@ -185,7 +187,7 @@ export default function OutreachLanding({ navigate }) {
       </section>
 
       {/* ── Benefits ─────────────────────────────────────────────────────────── */}
-      <section style={{ maxWidth: 900, margin: "0 auto", padding: "80px 24px" }}>
+      <section className="mob-sec" style={{ maxWidth: 900, margin: "0 auto", padding: "80px 24px" }}>
         <div style={{ textAlign: "center", marginBottom: 48 }}>
           <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: 3, textTransform: "uppercase", color: blue, marginBottom: 12 }}>
             What you get
@@ -223,7 +225,7 @@ export default function OutreachLanding({ navigate }) {
 
       {/* ── Lead form ────────────────────────────────────────────────────────── */}
       <section id="book" style={{ background: bg2, borderTop: `1px solid ${border}` }}>
-        <div style={{ maxWidth: 520, margin: "0 auto", padding: "80px 24px", textAlign: "center" }}>
+        <div className="mob-sec" style={{ maxWidth: 520, margin: "0 auto", padding: "80px 24px", textAlign: "center" }}>
           <h2 style={{ fontSize: "clamp(28px, 4vw, 42px)", fontWeight: 700, letterSpacing: -1, color: textHi, marginBottom: 12 }}>
             Let's talk.
           </h2>
@@ -277,7 +279,7 @@ export default function OutreachLanding({ navigate }) {
                   background: blue, color: "#fff", border: "none",
                   borderRadius: 10, padding: "16px",
                   fontSize: 16, fontWeight: 600, cursor: status === "sending" ? "wait" : "pointer",
-                  fontFamily: "inherit", letterSpacing: -0.2,
+                  fontFamily: "inherit", letterSpacing: -0.2, width: "100%",
                   boxShadow: `0 0 30px ${blueGlow}`,
                   opacity: status === "sending" ? 0.7 : 1,
                 }}
@@ -295,7 +297,7 @@ export default function OutreachLanding({ navigate }) {
       </section>
 
       {/* ── Footer ───────────────────────────────────────────────────────────── */}
-      <footer style={{
+      <footer className="mob-nav" style={{
         borderTop: `1px solid ${border}`, padding: "28px 40px",
         display: "flex", alignItems: "center", justifyContent: "space-between",
         flexWrap: "wrap", gap: 12,

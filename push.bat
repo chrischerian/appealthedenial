@@ -4,7 +4,7 @@ git config user.email "willjhooper@msn.com"
 git config user.name "Will Hooper"
 git remote set-url origin https://github.com/chrischerian/appealthedenial.git
 git add -A
-git commit -m "Fix useState import; add secret scanner hook + env example" > "%~dp0push_log.txt" 2>&1
+git commit -m "Mobile responsive layout for all pages" > "%~dp0push_log.txt" 2>&1
 git push origin HEAD >> "%~dp0push_log.txt" 2>&1
 type "%~dp0push_log.txt"
 echo.

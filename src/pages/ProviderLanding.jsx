@@ -33,6 +33,7 @@ export default function ProviderLanding({ navigate }) {
 
       {/* ── Nav ──────────────────────────────────────────────────────────────── */}
       <nav
+        className="mob-nav"
         style={{
           display: "flex", alignItems: "center", justifyContent: "space-between",
           padding: "20px 40px", borderBottom: "1px solid #0f1827",
@@ -46,6 +47,7 @@ export default function ProviderLanding({ navigate }) {
         <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
           <button
             onClick={() => navigate("/patients")}
+            className="mob-hide"
             style={{
               background: "transparent", border: "1px solid #1a2640",
               color: "#9CA3AF", borderRadius: 8, padding: "8px 16px",
@@ -74,6 +76,7 @@ export default function ProviderLanding({ navigate }) {
 
       {/* ── Hero ─────────────────────────────────────────────────────────────── */}
       <section
+        className="mob-hero"
         style={{
           maxWidth: 780, margin: "0 auto", padding: "110px 24px 90px",
           textAlign: "center",
@@ -117,6 +120,7 @@ export default function ProviderLanding({ navigate }) {
 
         <a
           href="mailto:willjhooper@msn.com"
+          className="mob-cta"
           style={{
             display: "inline-block",
             background: "#10b981", color: "#fff", border: "none",
@@ -134,7 +138,7 @@ export default function ProviderLanding({ navigate }) {
       </section>
 
       {/* ── How it works ─────────────────────────────────────────────────────── */}
-      <section style={{ maxWidth: 900, margin: "0 auto", padding: "96px 24px" }}>
+      <section className="mob-sec" style={{ maxWidth: 900, margin: "0 auto", padding: "96px 24px" }}>
         <div style={{ textAlign: "center", marginBottom: 56 }}>
           <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: 3, textTransform: "uppercase", color: "#10b981", marginBottom: 12 }}>
             How it works
@@ -167,7 +171,7 @@ export default function ProviderLanding({ navigate }) {
 
       {/* ── Denial types ─────────────────────────────────────────────────────── */}
       <section style={{ background: "#070c18", borderTop: "1px solid #0f1827", borderBottom: "1px solid #0f1827" }}>
-        <div style={{ maxWidth: 900, margin: "0 auto", padding: "80px 24px" }}>
+        <div className="mob-sec" style={{ maxWidth: 900, margin: "0 auto", padding: "80px 24px" }}>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: 3, textTransform: "uppercase", color: "#10b981", marginBottom: 12 }}>
               What we handle
@@ -205,7 +209,7 @@ export default function ProviderLanding({ navigate }) {
       </section>
 
       {/* ── What you get ─────────────────────────────────────────────────────── */}
-      <section style={{ maxWidth: 900, margin: "0 auto", padding: "80px 24px" }}>
+      <section className="mob-sec" style={{ maxWidth: 900, margin: "0 auto", padding: "80px 24px" }}>
         <div style={{ textAlign: "center", marginBottom: 40 }}>
           <h2 style={{ fontSize: "clamp(24px, 3vw, 34px)", fontWeight: 700, letterSpacing: -0.5, color: "#EFF6FF", marginBottom: 8 }}>
             What you get
@@ -235,7 +239,7 @@ export default function ProviderLanding({ navigate }) {
 
       {/* ── Final CTA ────────────────────────────────────────────────────────── */}
       <section style={{ background: "#070c18", borderTop: "1px solid #0f1827" }}>
-        <div style={{ maxWidth: 700, margin: "0 auto", padding: "96px 24px", textAlign: "center" }}>
+        <div className="mob-sec" style={{ maxWidth: 700, margin: "0 auto", padding: "96px 24px", textAlign: "center" }}>
           <h2 style={{ fontSize: "clamp(30px, 5vw, 48px)", fontWeight: 700, letterSpacing: -1.5, color: "#EFF6FF", marginBottom: 16 }}>
             Let's talk.
           </h2>
@@ -244,6 +248,7 @@ export default function ProviderLanding({ navigate }) {
           </p>
           <a
             href="mailto:willjhooper@msn.com"
+            className="mob-cta"
             style={{
               display: "inline-block",
               background: "#10b981", color: "#fff",
@@ -261,6 +266,7 @@ export default function ProviderLanding({ navigate }) {
 
       {/* ── Footer ───────────────────────────────────────────────────────────── */}
       <footer
+        className="mob-nav"
         style={{
           borderTop: "1px solid #0f1827", padding: "28px 40px",
           display: "flex", alignItems: "center", justifyContent: "space-between",
