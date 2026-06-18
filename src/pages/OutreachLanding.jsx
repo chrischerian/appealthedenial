@@ -1,4 +1,5 @@
 // ── Cold email landing page — appealthedenial.com/hello ──────────────────────
+import { useState } from "react";
 
 const BENEFITS = [
   {

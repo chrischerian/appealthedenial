@@ -12,6 +12,8 @@ dist
 dist-ssr
 *.local
 .env
+replacements.txt
+purge_secret_history.bat
 
 # Editor directories and files
 .vscode/*

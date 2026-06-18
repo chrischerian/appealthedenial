@@ -1,4 +1,9 @@
-[master 1e58164] Add provider homepage at /, move patient tool to /patients
- 2 files changed, 92 insertions(+), 22 deletions(-)
-To https://github.com/chrischerian/appealthedenial.git
-   9d8fffb..1e58164  HEAD -> master
+
+\033[0;31m[BLOCKED] Secret detected in staged file: .env.example\033[0m
+
+  Your commit contains what looks like a live API key or private key.
+  Move secrets to .env (which is gitignored) and use process.env.VAR_NAME
+
+  If this is a false positive: git commit --no-verify
+
+Everything up-to-date
