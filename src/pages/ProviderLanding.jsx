@@ -29,8 +29,14 @@ const HOW_IT_WORKS = [
   },
 ];
 
+const PLANS = [
+  { value: "contingency",  title: "Free unless we win", desc: "Pay nothing upfront. We take a percentage only when we recover the claim." },
+  { value: "flat_monthly", title: "Flat monthly",       desc: "One predictable monthly fee, unlimited appeals." },
+  { value: "per_appeal",   title: "Pay per appeal",     desc: "A flat price for each appeal we file." },
+];
+
 export default function ProviderLanding({ navigate }) {
-  const [form, setForm]     = useState({ name: "", email: "" });
+  const [form, setForm]     = useState({ name: "", email: "", selectedPlan: "" });
   const [status, setStatus] = useState("idle"); // idle | sending | done | error
 
   async function handleSubmit(e) {
@@ -155,6 +161,40 @@ export default function ProviderLanding({ navigate }) {
                 Drop your info and we'll reach out within one business day.
               </p>
               <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                {/* Plan selector — required before submit */}
+                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                  <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: 1, textTransform: "uppercase", color: "#64748B", marginBottom: 2 }}>
+                    Which pricing fits you?
+                  </div>
+                  {PLANS.map((p) => {
+                    const active = form.selectedPlan === p.value;
+                    return (
+                      <button
+                        type="button"
+                        key={p.value}
+                        onClick={() => setForm((f) => ({ ...f, selectedPlan: p.value }))}
+                        style={{
+                          textAlign: "left", cursor: "pointer", fontFamily: "inherit",
+                          background: active ? "#10b9811a" : "#FFFFFF",
+                          border: active ? "1.5px solid #10b981" : "1px solid #E2E8F0",
+                          borderRadius: 12, padding: "12px 14px",
+                          display: "flex", alignItems: "flex-start", gap: 10,
+                          transition: "border-color 0.15s, background 0.15s",
+                        }}
+                      >
+                        <span style={{
+                          width: 18, height: 18, borderRadius: "50%", flexShrink: 0, marginTop: 1,
+                          border: active ? "5px solid #10b981" : "2px solid #CBD5E1",
+                          background: "#FFFFFF", transition: "border 0.15s",
+                        }} />
+                        <span>
+                          <span style={{ display: "block", fontSize: 14, fontWeight: 600, color: "#0F172A" }}>{p.title}</span>
+                          <span style={{ display: "block", fontSize: 12.5, color: "#64748B", lineHeight: 1.5, marginTop: 2 }}>{p.desc}</span>
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
                 <input
                   type="text"
                   placeholder="Your name"
@@ -185,18 +225,25 @@ export default function ProviderLanding({ navigate }) {
                 />
                 <button
                   type="submit"
-                  disabled={status === "sending"}
+                  disabled={status === "sending" || !form.selectedPlan}
                   style={{
                     background: "#10b981", color: "#fff", border: "none",
                     borderRadius: 10, padding: "16px",
-                    fontSize: 16, fontWeight: 600, cursor: status === "sending" ? "wait" : "pointer",
+                    fontSize: 16, fontWeight: 600,
+                    cursor: (status === "sending" || !form.selectedPlan) ? "not-allowed" : "pointer",
                     fontFamily: "inherit", letterSpacing: -0.2, width: "100%",
-                    boxShadow: "0 0 30px #10b98140",
-                    opacity: status === "sending" ? 0.7 : 1,
+                    boxShadow: form.selectedPlan ? "0 0 30px #10b98140" : "none",
+                    opacity: (status === "sending" || !form.selectedPlan) ? 0.55 : 1,
+                    transition: "opacity 0.15s, box-shadow 0.15s",
                   }}
                 >
                   {status === "sending" ? "Sending…" : "Get in touch →"}
                 </button>
+                {!form.selectedPlan && (
+                  <p style={{ fontSize: 12.5, color: "#94A3B8", margin: 0, textAlign: "center" }}>
+                    Pick an option above to continue.
+                  </p>
+                )}
                 {status === "error" && (
                   <p style={{ fontSize: 13, color: "#f87171", margin: 0, textAlign: "center" }}>
                     Something went wrong — email us at willjhooper@msn.com
