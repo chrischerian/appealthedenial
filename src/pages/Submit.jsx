@@ -16,10 +16,10 @@ const URGENCY_OPTIONS = [
 function Label({ children, required, hint }) {
   return (
     <div style={{ marginBottom: 6 }}>
-      <label style={{ display: "block", fontSize: 13, color: "#9CA3AF", fontWeight: 500 }}>
+      <label style={{ display: "block", fontSize: 13, color: "#64748B", fontWeight: 500 }}>
         {children}{required && <span style={{ color: "#EF4444" }}> *</span>}
       </label>
-      {hint && <div style={{ fontSize: 11, color: "#374151", marginTop: 2 }}>{hint}</div>}
+      {hint && <div style={{ fontSize: 11, color: "#CBD5E1", marginTop: 2 }}>{hint}</div>}
     </div>
   );
 }
@@ -34,8 +34,8 @@ function Checkbox({ checked, onChange, children, description }) {
       onClick={() => onChange(!checked)}
       style={{
         display: "flex", alignItems: "flex-start", gap: 12,
-        background: checked ? "#3B82F608" : "transparent",
-        border: `1px solid ${checked ? "#3B82F640" : "#1a2640"}`,
+        background: checked ? "#05966908" : "transparent",
+        border: `1px solid ${checked ? "#05966940" : "#E2E8F0"}`,
         borderRadius: 10, padding: "14px 16px", marginBottom: 16,
         cursor: "pointer", transition: "all 0.15s",
       }}
@@ -43,8 +43,8 @@ function Checkbox({ checked, onChange, children, description }) {
       <div
         style={{
           width: 18, height: 18, borderRadius: 4, flexShrink: 0, marginTop: 2,
-          background: checked ? "#3B82F6" : "transparent",
-          border: `2px solid ${checked ? "#3B82F6" : "#374151"}`,
+          background: checked ? "#059669" : "transparent",
+          border: `2px solid ${checked ? "#059669" : "#CBD5E1"}`,
           display: "flex", alignItems: "center", justifyContent: "center",
           transition: "all 0.15s",
         }}
@@ -52,8 +52,8 @@ function Checkbox({ checked, onChange, children, description }) {
         {checked && <span style={{ color: "#fff", fontSize: 11, lineHeight: 1, fontWeight: 700 }}>✓</span>}
       </div>
       <div>
-        <div style={{ fontSize: 13, color: "#D1D5DB", fontWeight: 500, marginBottom: 3 }}>{children}</div>
-        {description && <div style={{ fontSize: 12, color: "#6B7280", lineHeight: 1.55 }}>{description}</div>}
+        <div style={{ fontSize: 13, color: "#475569", fontWeight: 500, marginBottom: 3 }}>{children}</div>
+        {description && <div style={{ fontSize: 12, color: "#64748B", lineHeight: 1.55 }}>{description}</div>}
       </div>
     </div>
   );
@@ -79,17 +79,17 @@ function FileUpload({ file, onChange }) {
   };
 
   return file ? (
-    <div style={{ border: "1px solid #1e3a5f", borderRadius: 10, padding: "12px 14px", display: "flex", alignItems: "center", gap: 12, background: "#0a1520" }}>
+    <div style={{ border: "1px solid #D7DEE7", borderRadius: 10, padding: "12px 14px", display: "flex", alignItems: "center", gap: 12, background: "#FFFFFF" }}>
       {isImage ? (
         <img src={previewUrl} alt="preview" style={{ width: 44, height: 44, objectFit: "cover", borderRadius: 6, flexShrink: 0 }} />
       ) : (
-        <div style={{ width: 44, height: 44, borderRadius: 6, flexShrink: 0, background: "#1a2640", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>📄</div>
+        <div style={{ width: 44, height: 44, borderRadius: 6, flexShrink: 0, background: "#E2E8F0", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>📄</div>
       )}
       <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ fontSize: 13, color: "#CBD5E1", fontWeight: 500, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{file.name}</div>
-        <div style={{ fontSize: 11, color: "#4B5563", marginTop: 2 }}>{(file.size / 1024).toFixed(0)} KB</div>
+        <div style={{ fontSize: 13, color: "#475569", fontWeight: 500, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{file.name}</div>
+        <div style={{ fontSize: 11, color: "#94A3B8", marginTop: 2 }}>{(file.size / 1024).toFixed(0)} KB</div>
       </div>
-      <button onClick={() => onChange(null)} style={{ background: "none", border: "none", color: "#4B5563", cursor: "pointer", fontSize: 18, padding: "0 4px", flexShrink: 0 }} title="Remove">×</button>
+      <button onClick={() => onChange(null)} style={{ background: "none", border: "none", color: "#94A3B8", cursor: "pointer", fontSize: 18, padding: "0 4px", flexShrink: 0 }} title="Remove">×</button>
     </div>
   ) : (
     <div
@@ -98,18 +98,18 @@ function FileUpload({ file, onChange }) {
       onDragLeave={() => setDrag(false)}
       onDrop={(e) => { e.preventDefault(); setDrag(false); accept(e.dataTransfer.files[0]); }}
       style={{
-        border: `1.5px dashed ${drag ? "#3B82F6" : "#1e3055"}`,
+        border: `1.5px dashed ${drag ? "#059669" : "#D7DEE7"}`,
         borderRadius: 10, padding: "24px 16px",
         textAlign: "center", cursor: "pointer",
-        background: drag ? "#3B82F608" : "transparent",
+        background: drag ? "#05966908" : "transparent",
         transition: "border-color 0.15s, background 0.15s",
       }}
     >
       <div style={{ fontSize: 22, marginBottom: 6 }}>📎</div>
-      <div style={{ fontSize: 13, color: "#6B7280", marginBottom: 2 }}>
-        Drop your denial letter here, or <span style={{ color: "#3B82F6" }}>browse</span>
+      <div style={{ fontSize: 13, color: "#64748B", marginBottom: 2 }}>
+        Drop your denial letter here, or <span style={{ color: "#059669" }}>browse</span>
       </div>
-      <div style={{ fontSize: 11, color: "#374151" }}>JPG, PNG, PDF · max 10 MB</div>
+      <div style={{ fontSize: 11, color: "#CBD5E1" }}>JPG, PNG, PDF · max 10 MB</div>
       <input ref={inputRef} type="file" accept="image/*,.pdf" style={{ display: "none" }} onChange={(e) => accept(e.target.files[0])} />
     </div>
   );
@@ -118,9 +118,9 @@ function FileUpload({ file, onChange }) {
 // ── Section divider ───────────────────────────────────────────────────────────
 function Section({ title, subtitle }) {
   return (
-    <div style={{ marginBottom: 20, paddingTop: 8, borderTop: "1px solid #1a2640", marginTop: 24 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: "#EFF6FF", marginBottom: 2 }}>{title}</div>
-      {subtitle && <div style={{ fontSize: 12, color: "#4B5563" }}>{subtitle}</div>}
+    <div style={{ marginBottom: 20, paddingTop: 8, borderTop: "1px solid #E2E8F0", marginTop: 24 }}>
+      <div style={{ fontSize: 13, fontWeight: 600, color: "#0F172A", marginBottom: 2 }}>{title}</div>
+      {subtitle && <div style={{ fontSize: 12, color: "#94A3B8" }}>{subtitle}</div>}
     </div>
   );
 }
@@ -163,20 +163,20 @@ export default function Submit({ navigate }) {
         {/* Back */}
         <button
           onClick={() => navigate("/")}
-          style={{ background: "none", color: "#4B5563", border: "none", cursor: "pointer", fontSize: 14, marginBottom: 36, padding: 0 }}
+          style={{ background: "none", color: "#94A3B8", border: "none", cursor: "pointer", fontSize: 14, marginBottom: 36, padding: 0 }}
         >
           ← Back
         </button>
 
         {/* Header */}
         <div style={{ marginBottom: 32 }}>
-          <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: 3, textTransform: "uppercase", color: "#3B82F6", marginBottom: 10 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: 3, textTransform: "uppercase", color: "#059669", marginBottom: 10 }}>
             AppealTheDenial
           </div>
-          <h2 style={{ fontSize: 28, fontWeight: 700, letterSpacing: -0.5, marginBottom: 8, color: "#EFF6FF" }}>
+          <h2 style={{ fontSize: 28, fontWeight: 700, letterSpacing: -0.5, marginBottom: 8, color: "#0F172A" }}>
             Tell us about your denial
           </h2>
-          <p style={{ color: "#6B7280", fontSize: 14 }}>We'll handle everything from here.</p>
+          <p style={{ color: "#64748B", fontSize: 14 }}>We'll handle everything from here.</p>
         </div>
 
         {/* Error */}
@@ -186,7 +186,7 @@ export default function Submit({ navigate }) {
           </div>
         )}
 
-        <div style={{ background: "#0f1827", border: "1px solid #1a2640", borderRadius: 14, padding: 28 }}>
+        <div style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 14, padding: 28 }}>
 
           {/* ── Your info ─────────────────────────────────────────────────── */}
           <FieldWrap>
@@ -238,7 +238,7 @@ export default function Submit({ navigate }) {
 
           <FieldWrap>
             <Label hint="Claude reads it and extracts all identifiers automatically">
-              Upload denial letter <span style={{ color: "#4B5563", fontWeight: 400 }}>(optional but recommended)</span>
+              Upload denial letter <span style={{ color: "#94A3B8", fontWeight: 400 }}>(optional but recommended)</span>
             </Label>
             <FileUpload file={denialFile} onChange={setDenialFile} />
           </FieldWrap>
@@ -299,8 +299,8 @@ export default function Submit({ navigate }) {
             disabled={!valid || loading}
             style={{
               width: "100%", marginTop: 8,
-              background: valid && !loading ? "#3B82F6" : "#1a2640",
-              color: valid && !loading ? "#fff" : "#4B5563",
+              background: valid && !loading ? "#059669" : "#E2E8F0",
+              color: valid && !loading ? "#fff" : "#94A3B8",
               border: "none", borderRadius: 9, padding: "14px 0",
               fontSize: 15, fontWeight: 600,
               cursor: valid && !loading ? "pointer" : "not-allowed",
@@ -309,13 +309,13 @@ export default function Submit({ navigate }) {
             }}
           >
             {loading && (
-              <span style={{ width: 14, height: 14, border: "2px solid #4B5563", borderTopColor: "#9CA3AF", borderRadius: "50%", display: "inline-block", animation: "spin 0.7s linear infinite" }} />
+              <span style={{ width: 14, height: 14, border: "2px solid #94A3B8", borderTopColor: "#64748B", borderRadius: "50%", display: "inline-block", animation: "spin 0.7s linear infinite" }} />
             )}
             {loading ? "Submitting…" : "Submit →"}
           </button>
         </div>
 
-        <div style={{ textAlign: "center", marginTop: 16, fontSize: 12, color: "#374151" }}>
+        <div style={{ textAlign: "center", marginTop: 16, fontSize: 12, color: "#CBD5E1" }}>
           Free &nbsp;·&nbsp; No account &nbsp;·&nbsp; Not legal advice
         </div>
       </div>

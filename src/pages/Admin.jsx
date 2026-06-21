@@ -61,14 +61,14 @@ function PasswordGate({ onAuth }) {
         `}</style>
 
         <div style={{ textAlign: "center", marginBottom: 32 }}>
-          <div style={{ fontSize: 13, fontWeight: 600, letterSpacing: 3, textTransform: "uppercase", color: "#3B82F6", marginBottom: 10 }}>
+          <div style={{ fontSize: 13, fontWeight: 600, letterSpacing: 3, textTransform: "uppercase", color: "#059669", marginBottom: 10 }}>
             AppealTheDenial
           </div>
-          <div style={{ fontSize: 20, fontWeight: 600, color: "#EFF6FF" }}>Admin Access</div>
+          <div style={{ fontSize: 20, fontWeight: 600, color: "#0F172A" }}>Admin Access</div>
         </div>
 
-        <div style={{ background: "#0f1827", border: "1px solid #1a2640", borderRadius: 12, padding: 28 }}>
-          <label style={{ display: "block", fontSize: 13, color: "#9CA3AF", marginBottom: 8, fontWeight: 500 }}>
+        <div style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 12, padding: 28 }}>
+          <label style={{ display: "block", fontSize: 13, color: "#64748B", marginBottom: 8, fontWeight: 500 }}>
             Password
           </label>
           <input
@@ -88,8 +88,8 @@ function PasswordGate({ onAuth }) {
             disabled={loading}
             style={{
               width: "100%",
-              background: loading ? "#1a2640" : "#3B82F6",
-              color: loading ? "#4B5563" : "#fff",
+              background: loading ? "#E2E8F0" : "#059669",
+              color: loading ? "#94A3B8" : "#fff",
               border: "none",
               borderRadius: 8,
               padding: "12px 0",
@@ -154,17 +154,17 @@ export default function Admin({ navigate }) {
       <div
         style={{
           width: 220,
-          background: "#070c18",
-          borderRight: "1px solid #1a2640",
+          background: "#F8FAFC",
+          borderRight: "1px solid #E2E8F0",
           display: "flex",
           flexDirection: "column",
           padding: "20px 12px",
           flexShrink: 0,
         }}
       >
-        <div style={{ padding: "0 8px 24px", borderBottom: "1px solid #1a2640", marginBottom: 20 }}>
-          <div style={{ fontSize: 15, fontWeight: 600, color: "#EFF6FF" }}>AppealTheDenial</div>
-          <div style={{ fontSize: 11, color: "#2a3a52", marginTop: 3 }}>Admin Dashboard</div>
+        <div style={{ padding: "0 8px 24px", borderBottom: "1px solid #E2E8F0", marginBottom: 20 }}>
+          <div style={{ fontSize: 15, fontWeight: 600, color: "#0F172A" }}>AppealTheDenial</div>
+          <div style={{ fontSize: 11, color: "#D7DEE7", marginTop: 3 }}>Admin Dashboard</div>
         </div>
 
         {NAV.map((n) => (
@@ -174,8 +174,8 @@ export default function Admin({ navigate }) {
             style={{
               display: "flex", alignItems: "center", gap: 10,
               padding: "10px 12px", borderRadius: 8,
-              background: view === n.key ? "#3B82F618" : "transparent",
-              color: view === n.key ? "#3B82F6" : "#6B7280",
+              background: view === n.key ? "#05966918" : "transparent",
+              color: view === n.key ? "#059669" : "#64748B",
               fontSize: 14, fontWeight: 500, marginBottom: 4,
               textAlign: "left", border: "none", cursor: "pointer",
               width: "100%", fontFamily: "inherit",
@@ -194,7 +194,7 @@ export default function Admin({ navigate }) {
           style={{
             display: "flex", alignItems: "center", gap: 8,
             padding: "9px 12px", borderRadius: 8, marginBottom: 4,
-            background: "transparent", color: "#374151",
+            background: "transparent", color: "#CBD5E1",
             fontSize: 12, border: "none", cursor: "pointer",
             width: "100%", fontFamily: "inherit",
           }}
@@ -206,7 +206,7 @@ export default function Admin({ navigate }) {
           style={{
             display: "flex", alignItems: "center", gap: 8,
             padding: "9px 12px", borderRadius: 8, marginBottom: 8,
-            background: "transparent", color: "#374151",
+            background: "transparent", color: "#CBD5E1",
             fontSize: 12, border: "none", cursor: "pointer",
             width: "100%", fontFamily: "inherit",
           }}
@@ -214,7 +214,7 @@ export default function Admin({ navigate }) {
           Sign out
         </button>
 
-        <div style={{ padding: "8px", fontSize: 11, color: "#1e2d42", lineHeight: 1.5 }}>
+        <div style={{ padding: "8px", fontSize: 11, color: "#94A3B8", lineHeight: 1.5 }}>
           Not legal advice.
         </div>
       </div>

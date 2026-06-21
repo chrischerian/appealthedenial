@@ -72,15 +72,15 @@ export default function OutreachLanding({ navigate }) {
   }
 
   // ── Inline style tokens ──────────────────────────────────────────────────────
-  const bg       = "#090d18";
-  const bg2      = "#070c18";
-  const card     = "#0f1827";
-  const border   = "#1a2640";
+  const bg       = "#FFFFFF";
+  const bg2      = "#F8FAFC";
+  const card     = "#FFFFFF";
+  const border   = "#E2E8F0";
   const blue     = "#10b981";
   const blueGlow = "#10b98150";
-  const textHi   = "#EFF6FF";
-  const textMid  = "#9CA3AF";
-  const textLow  = "#6B7280";
+  const textHi   = "#0F172A";
+  const textMid  = "#64748B";
+  const textLow  = "#64748B";
 
   return (
     <div style={{ fontFamily: "'DM Sans', sans-serif", background: bg, minHeight: "100vh", color: textHi }}>
@@ -90,7 +90,7 @@ export default function OutreachLanding({ navigate }) {
         display: "flex", alignItems: "center", justifyContent: "space-between",
         padding: "20px 40px", borderBottom: `1px solid ${border}`,
         position: "sticky", top: 0, zIndex: 10,
-        background: "rgba(9,13,24,0.92)", backdropFilter: "blur(12px)",
+        background: "rgba(255,255,255,0.85)", backdropFilter: "blur(12px)",
       }}>
         <div style={{ fontSize: 15, fontWeight: 700, letterSpacing: -0.3, color: textHi }}>
           Appeal<span style={{ color: blue }}>TheDenial</span>
@@ -307,13 +307,13 @@ export default function OutreachLanding({ navigate }) {
         </div>
         <button
           onClick={() => navigate("/providers")}
-          style={{ background: "none", border: "none", cursor: "pointer", fontSize: 13, color: "#4B5563", fontFamily: "inherit" }}
+          style={{ background: "none", border: "none", cursor: "pointer", fontSize: 13, color: "#94A3B8", fontFamily: "inherit" }}
         >
           For providers →
         </button>
         <button
           onClick={() => navigate("/patients")}
-          style={{ background: "none", border: "none", cursor: "pointer", fontSize: 13, color: "#4B5563", fontFamily: "inherit" }}
+          style={{ background: "none", border: "none", cursor: "pointer", fontSize: 13, color: "#94A3B8", fontFamily: "inherit" }}
         >
           For patients →
         </button>

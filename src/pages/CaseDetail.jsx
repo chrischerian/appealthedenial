@@ -162,10 +162,10 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
   if (loadingFull) {
     return (
       <div style={{ maxWidth: 900, margin: "0 auto" }}>
-        <button onClick={onBack} style={{ background: "none", color: "#6B7280", marginBottom: 20, fontSize: 14, padding: 0, border: "none", cursor: "pointer" }}>
+        <button onClick={onBack} style={{ background: "none", color: "#64748B", marginBottom: 20, fontSize: 14, padding: 0, border: "none", cursor: "pointer" }}>
           ← All Cases
         </button>
-        <div style={{ display: "flex", alignItems: "center", gap: 14, padding: "32px 0", color: "#4B5563" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 14, padding: "32px 0", color: "#94A3B8" }}>
           <Spinner size={18} />
           <span style={{ fontSize: 14 }}>Loading case…</span>
         </div>
@@ -179,7 +179,7 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
       {/* ── Page header ──────────────────────────────────────────────────────── */}
       <button
         onClick={onBack}
-        style={{ background: "none", color: "#6B7280", marginBottom: 20, fontSize: 14, padding: 0, border: "none", cursor: "pointer" }}
+        style={{ background: "none", color: "#64748B", marginBottom: 20, fontSize: 14, padding: 0, border: "none", cursor: "pointer" }}
       >
         ← All Cases
       </button>
@@ -187,12 +187,12 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
       <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 24, gap: 16, flexWrap: "wrap" }}>
         <div>
           <h2 style={{ fontSize: 22, fontWeight: 600, marginBottom: 4 }}>{denial.procedure || "Untitled case"}</h2>
-          <div style={{ color: "#6B7280", fontSize: 14 }}>
+          <div style={{ color: "#64748B", fontSize: 14 }}>
             {denial.insurer}{denial.denial_type ? ` · ${denial.denial_type}` : ""}
           </div>
-          <div style={{ color: "#6B7280", fontSize: 13, marginTop: 3 }}>
+          <div style={{ color: "#64748B", fontSize: 13, marginTop: 3 }}>
             {denial.patient_name && <span>{denial.patient_name}{n.patientEmail ? " · " : ""}</span>}
-            {n.patientEmail && <span style={{ color: "#3B82F6" }}>{n.patientEmail}</span>}
+            {n.patientEmail && <span style={{ color: "#059669" }}>{n.patientEmail}</span>}
             {!denial.patient_name && !n.patientEmail && "Unknown customer"}
           </div>
         </div>
@@ -210,7 +210,7 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
           <select
             value={denial.status}
             onChange={(e) => updateStatus(e.target.value)}
-            style={{ background: "#0f1827", border: "1px solid #1a2640", color: "#EFF6FF", borderRadius: 8, padding: "8px 12px", fontSize: 13, width: "auto" }}
+            style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", color: "#0F172A", borderRadius: 8, padding: "8px 12px", fontSize: 13, width: "auto" }}
           >
             {["Processing", ...STATUSES].map((s) => <option key={s}>{s}</option>)}
           </select>
@@ -234,11 +234,11 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
               <span style={{ fontSize: 13, fontWeight: 600, color }}>
                 Appeal deadline: {fmtDate(denial.appeal_deadline)}
               </span>
-              <span style={{ fontSize: 13, color: "#9CA3AF", marginLeft: 8 }}>
+              <span style={{ fontSize: 13, color: "#64748B", marginLeft: 8 }}>
                 ({daysLeft} day{daysLeft !== 1 ? "s" : ""} remaining)
               </span>
             </div>
-            <span style={{ fontSize: 12, color: "#6B7280" }}>File immediately</span>
+            <span style={{ fontSize: 12, color: "#64748B" }}>File immediately</span>
           </div>
         );
       })()}
@@ -255,7 +255,7 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
             Appeal filed via {denial.delivery_method === "fax" ? "fax" : "USPS Certified Mail"}
           </span>
           {denial.delivery_tracking && (
-            <span style={{ color: "#6B7280", fontFamily: "monospace", fontSize: 12 }}>
+            <span style={{ color: "#64748B", fontFamily: "monospace", fontSize: 12 }}>
               {denial.delivery_tracking}
             </span>
           )}
@@ -274,7 +274,7 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
                   <div
                     style={{
                       flex: 1, height: 2,
-                      background: pipeline[i - 1].done ? "#3B82F6" : "#1a2640",
+                      background: pipeline[i - 1].done ? "#059669" : "#E2E8F0",
                       transition: "background 0.5s",
                     }}
                   />
@@ -282,8 +282,8 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
                 <div
                   style={{
                     width: 34, height: 34, borderRadius: "50%", flexShrink: 0,
-                    background: step.done ? "#3B82F6" : step.active ? "#1a2640" : "#1a2640",
-                    border: `2px solid ${step.done ? "#3B82F6" : step.active ? "#8B5CF6" : "#1a2640"}`,
+                    background: step.done ? "#059669" : step.active ? "#E2E8F0" : "#E2E8F0",
+                    border: `2px solid ${step.done ? "#059669" : step.active ? "#8B5CF6" : "#E2E8F0"}`,
                     display: "flex", alignItems: "center", justifyContent: "center",
                     transition: "all 0.4s",
                   }}
@@ -293,14 +293,14 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
                   ) : step.active ? (
                     <Spinner size={14} color="#8B5CF6" />
                   ) : (
-                    <span style={{ color: "#374151", fontSize: 12, fontWeight: 600 }}>{i + 1}</span>
+                    <span style={{ color: "#CBD5E1", fontSize: 12, fontWeight: 600 }}>{i + 1}</span>
                   )}
                 </div>
                 {i < pipeline.length - 1 && (
                   <div
                     style={{
                       flex: 1, height: 2,
-                      background: step.done ? "#3B82F6" : "#1a2640",
+                      background: step.done ? "#059669" : "#E2E8F0",
                       transition: "background 0.5s",
                     }}
                   />
@@ -311,14 +311,14 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
                 <div
                   style={{
                     fontSize: 13, fontWeight: 500,
-                    color: step.done ? "#EFF6FF" : step.active ? "#8B5CF6" : "#374151",
+                    color: step.done ? "#0F172A" : step.active ? "#8B5CF6" : "#CBD5E1",
                   }}
                 >
                   {step.label}
                 </div>
-                <div style={{ fontSize: 11, color: "#4B5563", marginTop: 2 }}>{step.sub}</div>
+                <div style={{ fontSize: 11, color: "#94A3B8", marginTop: 2 }}>{step.sub}</div>
                 {step.ts && (
-                  <div style={{ fontSize: 11, color: "#2a3a52", marginTop: 3 }}>{fmtTs(step.ts)}</div>
+                  <div style={{ fontSize: 11, color: "#D7DEE7", marginTop: 3 }}>{fmtTs(step.ts)}</div>
                 )}
               </div>
             </div>
@@ -332,12 +332,12 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
           <ProgressRing value={a.winProbability} size={88} />
           <div style={{ flex: 1 }}>
             <SectionLabel>AI Assessment</SectionLabel>
-            <div style={{ fontSize: 13, lineHeight: 1.65, marginBottom: 12, color: "#D1D5DB" }}>{a.summary}</div>
+            <div style={{ fontSize: 13, lineHeight: 1.65, marginBottom: 12, color: "#475569" }}>{a.summary}</div>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
               <Badge color={a.urgency === "high" ? "#EF4444" : a.urgency === "medium" ? "#F59E0B" : "#10B981"}>
                 {a.urgency} urgency
               </Badge>
-              {a.timeframe && <Badge color="#3B82F6">{a.timeframe}</Badge>}
+              {a.timeframe && <Badge color="#059669">{a.timeframe}</Badge>}
               {(a.legalCitations || []).slice(0, 3).map((c, i) => (
                 <Badge key={i} color="#8B5CF6">{c}</Badge>
               ))}
@@ -367,16 +367,16 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
         {a.strategy ? (
           <Card>
             <SectionLabel>Appeal Strategy</SectionLabel>
-            <p style={{ lineHeight: 1.8, color: "#D1D5DB", fontSize: 14, marginBottom: a.escalationPath?.length ? 16 : 0 }}>
+            <p style={{ lineHeight: 1.8, color: "#475569", fontSize: 14, marginBottom: a.escalationPath?.length ? 16 : 0 }}>
               {a.strategy}
             </p>
             {(a.escalationPath || []).length > 0 && (
-              <div style={{ borderTop: "1px solid #1a2640", paddingTop: 16 }}>
+              <div style={{ borderTop: "1px solid #E2E8F0", paddingTop: 16 }}>
                 <SectionLabel style={{ marginBottom: 8 }}>If Denied Again</SectionLabel>
                 {a.escalationPath.map((s, i) => (
                   <div key={i} style={{ display: "flex", gap: 8, marginBottom: 8 }}>
                     <div style={{ width: 5, height: 5, borderRadius: "50%", background: "#F59E0B", flexShrink: 0, marginTop: 7 }} />
-                    <div style={{ fontSize: 13, color: "#9CA3AF", lineHeight: 1.6 }}>{s}</div>
+                    <div style={{ fontSize: 13, color: "#64748B", lineHeight: 1.6 }}>{s}</div>
                   </div>
                 ))}
               </div>
@@ -399,7 +399,7 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
                 <div style={{ fontSize: 14, color: "#8B5CF6", marginTop: 16, fontWeight: 600 }}>
                   Analysis in progress…
                 </div>
-                <div style={{ fontSize: 12, color: "#4B5563", marginTop: 6, lineHeight: 1.6 }}>
+                <div style={{ fontSize: 12, color: "#94A3B8", marginTop: 6, lineHeight: 1.6 }}>
                   Building legal strategy and calculating win probability
                 </div>
               </>
@@ -407,23 +407,23 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
               <>
                 <div style={{ fontSize: 28, marginBottom: 10 }}>⚠️</div>
                 <div style={{ fontSize: 14, color: "#EF4444", fontWeight: 600 }}>Processing failed</div>
-                <div style={{ fontSize: 12, color: "#4B5563", marginTop: 6, lineHeight: 1.6 }}>
-                  Change status to <strong style={{ color: "#9CA3AF" }}>New</strong> then use Re-analyze to retry
+                <div style={{ fontSize: 12, color: "#94A3B8", marginTop: 6, lineHeight: 1.6 }}>
+                  Change status to <strong style={{ color: "#64748B" }}>New</strong> then use Re-analyze to retry
                 </div>
               </>
             ) : denial.status === "Info Needed" ? (
               <>
                 <div style={{ fontSize: 28, marginBottom: 10 }}>✉️</div>
                 <div style={{ fontSize: 14, color: "#F59E0B", fontWeight: 600 }}>Waiting on customer</div>
-                <div style={{ fontSize: 12, color: "#4B5563", marginTop: 6, lineHeight: 1.6, maxWidth: 200 }}>
+                <div style={{ fontSize: 12, color: "#94A3B8", marginTop: 6, lineHeight: 1.6, maxWidth: 200 }}>
                   We emailed the customer asking for missing information. Strategy will generate once they respond.
                 </div>
               </>
             ) : (
               <>
                 <div style={{ fontSize: 28, marginBottom: 10 }}>🔍</div>
-                <div style={{ fontSize: 14, color: "#6B7280", fontWeight: 600 }}>Appeal strategy pending</div>
-                <div style={{ fontSize: 12, color: "#4B5563", marginTop: 6, lineHeight: 1.6 }}>
+                <div style={{ fontSize: 14, color: "#64748B", fontWeight: 600 }}>Appeal strategy pending</div>
+                <div style={{ fontSize: 12, color: "#94A3B8", marginTop: 6, lineHeight: 1.6 }}>
                   AI analysis will populate this panel automatically
                 </div>
               </>
@@ -444,7 +444,7 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
                     <div
                       style={{
                         width: 22, height: 22, borderRadius: "50%",
-                        background: "#3B82F620", color: "#3B82F6",
+                        background: "#05966920", color: "#059669",
                         fontSize: 11, fontWeight: 600,
                         display: "flex", alignItems: "center", justifyContent: "center",
                         flexShrink: 0, marginTop: 2,
@@ -452,7 +452,7 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
                     >
                       {i + 1}
                     </div>
-                    <div style={{ fontSize: 13, color: "#D1D5DB", lineHeight: 1.6 }}>{arg}</div>
+                    <div style={{ fontSize: 13, color: "#475569", lineHeight: 1.6 }}>{arg}</div>
                   </div>
                 ))}
               </div>
@@ -467,13 +467,13 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
                   {a.evidenceNeeded.map((e, i) => (
                     <div key={i} style={{ display: "flex", gap: 10, marginBottom: 10 }}>
                       <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#F59E0B", flexShrink: 0, marginTop: 6 }} />
-                      <div style={{ fontSize: 13, color: "#D1D5DB", lineHeight: 1.6 }}>{e}</div>
+                      <div style={{ fontSize: 13, color: "#475569", lineHeight: 1.6 }}>{e}</div>
                     </div>
                   ))}
                 </>
               )}
               {a.legalCitations?.length > 0 && (
-                <div style={{ marginTop: a.evidenceNeeded?.length ? 16 : 0, borderTop: a.evidenceNeeded?.length ? "1px solid #1a2640" : "none", paddingTop: a.evidenceNeeded?.length ? 16 : 0 }}>
+                <div style={{ marginTop: a.evidenceNeeded?.length ? 16 : 0, borderTop: a.evidenceNeeded?.length ? "1px solid #E2E8F0" : "none", paddingTop: a.evidenceNeeded?.length ? 16 : 0 }}>
                   <SectionLabel style={{ marginBottom: 8 }}>Legal Citations</SectionLabel>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
                     {a.legalCitations.map((c, i) => <Badge key={i} color="#8B5CF6">{c}</Badge>)}
@@ -495,7 +495,7 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
                 <div
                   style={{
                     width: 22, height: 22, borderRadius: "50%",
-                    background: "#3B82F620", color: "#3B82F6",
+                    background: "#05966920", color: "#059669",
                     fontSize: 11, fontWeight: 600,
                     display: "flex", alignItems: "center", justifyContent: "center",
                     flexShrink: 0, marginTop: 1,
@@ -503,7 +503,7 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
                 >
                   {i + 1}
                 </div>
-                <div style={{ fontSize: 13, color: "#D1D5DB", lineHeight: 1.6 }}>{s}</div>
+                <div style={{ fontSize: 13, color: "#475569", lineHeight: 1.6 }}>{s}</div>
               </div>
             ))}
           </div>
@@ -530,7 +530,7 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
         <ErrorMsg>{letterError}</ErrorMsg>
 
         {genLetter && (
-          <div style={{ display: "flex", alignItems: "center", gap: 12, padding: 16, background: "#070c18", borderRadius: 8, color: "#6B7280", fontSize: 13, marginBottom: 12 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 12, padding: 16, background: "#F8FAFC", borderRadius: 8, color: "#64748B", fontSize: 13, marginBottom: 12 }}>
             <Spinner size={14} />
             Writing appeal letter… this takes about 20–30 seconds
           </div>
@@ -539,14 +539,14 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
         {letter ? (
           <div
             style={{
-              background: "#070c18",
-              border: "1px solid #1a2640",
+              background: "#F8FAFC",
+              border: "1px solid #E2E8F0",
               borderRadius: 10,
               padding: "24px 28px",
               fontFamily: "'IBM Plex Mono', monospace",
               fontSize: 12.5,
               lineHeight: 1.95,
-              color: "#c9d1d9",
+              color: "#334155",
               whiteSpace: "pre-wrap",
               maxHeight: 520,
               overflowY: "auto",
@@ -555,7 +555,7 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
             {letter}
           </div>
         ) : !genLetter ? (
-          <div style={{ textAlign: "center", padding: "32px 20px", color: "#4B5563", fontSize: 14 }}>
+          <div style={{ textAlign: "center", padding: "32px 20px", color: "#94A3B8", fontSize: 14 }}>
             No letter generated yet.
           </div>
         ) : null}
@@ -567,7 +567,7 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: showExtReview ? 16 : 0 }}>
             <div>
               <SectionLabel style={{ marginBottom: 4, color: "#F97316" }}>External Review Available</SectionLabel>
-              <div style={{ fontSize: 13, color: "#9CA3AF" }}>Your internal appeal was upheld. You have a federal right to independent external review under ACA § 2719.</div>
+              <div style={{ fontSize: 13, color: "#64748B" }}>Your internal appeal was upheld. You have a federal right to independent external review under ACA § 2719.</div>
             </div>
             <div style={{ display: "flex", gap: 8, flexShrink: 0, marginLeft: 16 }}>
               {extReview && !genExtReview && (
@@ -588,13 +588,13 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
           {showExtReview && (
             <>
               {genExtReview && (
-                <div style={{ display: "flex", alignItems: "center", gap: 10, padding: 14, background: "#070c18", borderRadius: 8, color: "#6B7280", fontSize: 13, marginBottom: 12 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, padding: 14, background: "#F8FAFC", borderRadius: 8, color: "#64748B", fontSize: 13, marginBottom: 12 }}>
                   <Spinner size={13} />
                   Drafting external review request…
                 </div>
               )}
               {extReview && (
-                <div style={{ background: "#070c18", border: "1px solid #1a2640", borderRadius: 10, padding: "20px 24px", fontFamily: "'IBM Plex Mono', monospace", fontSize: 12.5, lineHeight: 1.9, color: "#c9d1d9", whiteSpace: "pre-wrap", maxHeight: 400, overflowY: "auto" }}>
+                <div style={{ background: "#F8FAFC", border: "1px solid #E2E8F0", borderRadius: 10, padding: "20px 24px", fontFamily: "'IBM Plex Mono', monospace", fontSize: 12.5, lineHeight: 1.9, color: "#334155", whiteSpace: "pre-wrap", maxHeight: 400, overflowY: "auto" }}>
                   {extReview}
                 </div>
               )}
@@ -629,14 +629,14 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
                       top: 14,
                       width: 2,
                       height: "calc(100% - 4px)",
-                      background: "#1a2640",
+                      background: "#E2E8F0",
                     }}
                   />
                 )}
-                <div style={{ width: 12, height: 12, borderRadius: "50%", background: "#3B82F6", flexShrink: 0, marginTop: 3, zIndex: 1 }} />
+                <div style={{ width: 12, height: 12, borderRadius: "50%", background: "#059669", flexShrink: 0, marginTop: 3, zIndex: 1 }} />
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: 13, color: "#D1D5DB" }}>{t.event}</div>
-                  <div style={{ fontSize: 11, color: "#4B5563", marginTop: 2 }}>{fmtTs(t.ts)}</div>
+                  <div style={{ fontSize: 13, color: "#475569" }}>{t.event}</div>
+                  <div style={{ fontSize: 11, color: "#94A3B8", marginTop: 2 }}>{fmtTs(t.ts)}</div>
                 </div>
               </div>
             ))}
@@ -678,7 +678,7 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
               }}
             >
               {chat.length === 0 && (
-                <div style={{ textAlign: "center", padding: "40px 20px", color: "#4B5563", fontSize: 13 }}>
+                <div style={{ textAlign: "center", padding: "40px 20px", color: "#94A3B8", fontSize: 13 }}>
                   Ask anything about this case — strategy, legal angles, next steps, what to say when calling...
                 </div>
               )}
@@ -688,13 +688,13 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
                   style={{
                     alignSelf: m.role === "user" ? "flex-end" : "flex-start",
                     maxWidth: "80%",
-                    background: m.role === "user" ? "#3B82F6" : "#070c18",
-                    border: `1px solid ${m.role === "user" ? "transparent" : "#1a2640"}`,
+                    background: m.role === "user" ? "#059669" : "#F8FAFC",
+                    border: `1px solid ${m.role === "user" ? "transparent" : "#E2E8F0"}`,
                     borderRadius: 10,
                     padding: "9px 13px",
                     fontSize: 13,
                     lineHeight: 1.7,
-                    color: "#EFF6FF",
+                    color: "#0F172A",
                   }}
                 >
                   {m.content || (chatLoading && i === chat.length - 1 ? <Spinner size={12} /> : "")}
@@ -723,10 +723,10 @@ export default function CaseDetail({ denial: initial, onBack, onUpdate }) {
 function InfoRow({ label, value, highlight }) {
   return (
     <div style={{ display: "flex", gap: 12, marginBottom: 9, fontSize: 13 }}>
-      <div style={{ color: "#4B5563", minWidth: 100, flexShrink: 0 }}>{label}</div>
+      <div style={{ color: "#94A3B8", minWidth: 100, flexShrink: 0 }}>{label}</div>
       <div
         style={{
-          color: highlight ? "#93c5fd" : "#D1D5DB",
+          color: highlight ? "#34D399" : "#475569",
           fontWeight: highlight ? 500 : 400,
           wordBreak: "break-word",
         }}

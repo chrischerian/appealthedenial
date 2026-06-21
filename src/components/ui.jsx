@@ -2,11 +2,11 @@
 
 export const STATUS_COLORS = {
   Processing:               "#8B5CF6",
-  New:                      "#3B82F6",
+  New:                      "#059669",
   Analyzing:                "#8B5CF6",
   "Info Needed":            "#F59E0B",
   "Appeal Drafted":         "#F59E0B",
-  "Letter Ready":           "#3B82F6",
+  "Letter Ready":           "#059669",
   "Letter Sent":            "#10B981",
   "Provider Action Needed": "#F97316",
   "Following Up":           "#F97316",
@@ -18,14 +18,14 @@ export const STATUS_COLORS = {
 
 // Denial category display metadata
 export const CATEGORY_META = {
-  medical_necessity: { label: "Medical Necessity", color: "#3B82F6" },
+  medical_necessity: { label: "Medical Necessity", color: "#059669" },
   experimental:      { label: "Experimental",      color: "#8B5CF6" },
   prior_auth:        { label: "Prior Auth",         color: "#8B5CF6" },
   plan_exclusion:    { label: "Plan Exclusion",     color: "#F97316" },
   out_of_network:    { label: "Out of Network",     color: "#14B8A6" },
   billing_error:     { label: "Billing Error",      color: "#F59E0B" },
-  late_filing:       { label: "Late Filing",        color: "#6B7280" },
-  eligibility:       { label: "Eligibility",        color: "#6B7280" },
+  late_filing:       { label: "Late Filing",        color: "#64748B" },
+  eligibility:       { label: "Eligibility",        color: "#64748B" },
 };
 
 export const STATUSES = Object.keys(STATUS_COLORS);
@@ -50,7 +50,7 @@ export const STATUS_MAP = {
   Analyzing:        { label: "In Progress",    color: "#8B5CF6", step: 1, msg: "Analyzing your denial and calculating your chances." },
   "Info Needed":    { label: "Info Needed",    color: "#F59E0B", step: 1, msg: "We need a few more details to draft your letter. Check your email for our request." },
   "Appeal Drafted": { label: "In Progress",    color: "#F59E0B", step: 2, msg: "Your appeal letter is being finalized." },
-  "Letter Ready":   { label: "Letter Ready",   color: "#3B82F6", step: 2, msg: "Your appeal letter is ready and has been emailed to you." },
+  "Letter Ready":   { label: "Letter Ready",   color: "#059669", step: 2, msg: "Your appeal letter is ready and has been emailed to you." },
   "Letter Sent":    { label: "Filed",          color: "#10B981", step: 3, msg: "Your appeal has been filed with your insurance company." },
   "Provider Action Needed": { label: "Provider Notified", color: "#F97316", step: 2, msg: "Your provider's billing office has been notified. They need to resubmit a corrected claim." },
   "Following Up":   { label: "Following Up",   color: "#F97316", step: 3, msg: "Your letter was sent. We're monitoring for a response." },
@@ -72,14 +72,14 @@ export const DENIAL_TYPES = [
 ];
 
 // ── Spinner ───────────────────────────────────────────────────────────────────
-export function Spinner({ size = 16, color = "#3B82F6" }) {
+export function Spinner({ size = 16, color = "#059669" }) {
   return (
     <span
       style={{
         display: "inline-block",
         width: size,
         height: size,
-        border: "2px solid #1a2640",
+        border: "2px solid #E2E8F0",
         borderTopColor: color,
         borderRadius: "50%",
         animation: "spin 0.7s linear infinite",
@@ -92,9 +92,9 @@ export function Spinner({ size = 16, color = "#3B82F6" }) {
 // ── Button ────────────────────────────────────────────────────────────────────
 export function Btn({ children, onClick, variant = "primary", loading, disabled, style }) {
   const variants = {
-    primary: { background: "#3B82F6", color: "#fff", border: "none" },
-    ghost:   { background: "transparent", color: "#6B7280", border: "1px solid #1e2d45" },
-    subtle:  { background: "#0f1827", color: "#9CA3AF", border: "1px solid #1e2d45" },
+    primary: { background: "#059669", color: "#fff", border: "none" },
+    ghost:   { background: "transparent", color: "#64748B", border: "1px solid #E2E8F0" },
+    subtle:  { background: "#F1F5F9", color: "#475569", border: "1px solid #E2E8F0" },
     success: { background: "#10B981", color: "#fff", border: "none" },
     danger:  { background: "#EF4444", color: "#fff", border: "none" },
   };
@@ -118,7 +118,7 @@ export function Btn({ children, onClick, variant = "primary", loading, disabled,
         ...style,
       }}
     >
-      {loading && <Spinner size={13} color={variant === "primary" || variant === "success" ? "#fff" : "#3B82F6"} />}
+      {loading && <Spinner size={13} color={variant === "primary" || variant === "success" ? "#fff" : "#059669"} />}
       {children}
     </button>
   );
@@ -154,7 +154,7 @@ export function ProgressRing({ value, size = 80 }) {
   const color = clamped >= 70 ? "#10B981" : clamped >= 45 ? "#F59E0B" : "#EF4444";
   return (
     <svg width={size} height={size} style={{ transform: "rotate(-90deg)", flexShrink: 0 }}>
-      <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#1a2640" strokeWidth={7} />
+      <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#E2E8F0" strokeWidth={7} />
       <circle
         cx={size / 2} cy={size / 2} r={r}
         fill="none" stroke={color} strokeWidth={7}
@@ -183,7 +183,7 @@ export function ProgressRing({ value, size = 80 }) {
 export function Field({ label, value, onChange, placeholder, options, type = "text", required, hint }) {
   return (
     <div style={{ marginBottom: 18 }}>
-      <label style={{ display: "block", fontSize: 13, color: "#9CA3AF", marginBottom: 6, fontWeight: 500 }}>
+      <label style={{ display: "block", fontSize: 13, color: "#64748B", marginBottom: 6, fontWeight: 500 }}>
         {label}
         {required && <span style={{ color: "#EF4444" }}> *</span>}
       </label>
@@ -197,7 +197,7 @@ export function Field({ label, value, onChange, placeholder, options, type = "te
       ) : (
         <input type={type} value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} />
       )}
-      {hint && <div style={{ fontSize: 12, color: "#4B5563", marginTop: 5 }}>{hint}</div>}
+      {hint && <div style={{ fontSize: 12, color: "#94A3B8", marginTop: 5 }}>{hint}</div>}
     </div>
   );
 }
@@ -207,10 +207,11 @@ export function Card({ children, style }) {
   return (
     <div
       style={{
-        background: "#0f1827",
-        border: "1px solid #1a2640",
+        background: "#FFFFFF",
+        border: "1px solid #E2E8F0",
         borderRadius: 12,
         padding: 20,
+        boxShadow: "0 1px 3px rgba(15,23,42,0.04), 0 1px 2px rgba(15,23,42,0.06)",
         ...style,
       }}
     >
@@ -225,7 +226,7 @@ export function SectionLabel({ children, style }) {
     <div
       style={{
         fontSize: 11,
-        color: "#4B5563",
+        color: "#94A3B8",
         textTransform: "uppercase",
         letterSpacing: 1.2,
         marginBottom: 12,

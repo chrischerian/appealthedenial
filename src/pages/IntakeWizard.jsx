@@ -147,18 +147,18 @@ export default function IntakeWizard({ onBack, onComplete }) {
     <div style={{ maxWidth: 640, margin: "0 auto" }}>
       <button
         onClick={onBack}
-        style={{ background: "none", color: "#6B7280", marginBottom: 24, fontSize: 14, padding: 0, border: "none", cursor: "pointer" }}
+        style={{ background: "none", color: "#64748B", marginBottom: 24, fontSize: 14, padding: 0, border: "none", cursor: "pointer" }}
       >
         &larr; Back
       </button>
 
       {/* Progress header */}
       <div style={{ marginBottom: 28 }}>
-        <div style={{ fontSize: 12, color: "#4B5563", textTransform: "uppercase", letterSpacing: 1, marginBottom: 6 }}>
+        <div style={{ fontSize: 12, color: "#94A3B8", textTransform: "uppercase", letterSpacing: 1, marginBottom: 6 }}>
           Step {step + 1} of {steps.length}
         </div>
         <h2 style={{ fontSize: 22, fontWeight: 600, marginBottom: 4 }}>{cur.title}</h2>
-        <p style={{ color: "#6B7280", fontSize: 14 }}>{cur.subtitle}</p>
+        <p style={{ color: "#64748B", fontSize: 14 }}>{cur.subtitle}</p>
         <div style={{ display: "flex", gap: 6, marginTop: 16 }}>
           {steps.map((_, i) => (
             <div
@@ -167,7 +167,7 @@ export default function IntakeWizard({ onBack, onComplete }) {
                 height: 3,
                 flex: 1,
                 borderRadius: 2,
-                background: i <= step ? "#3B82F6" : "#1a2640",
+                background: i <= step ? "#059669" : "#E2E8F0",
                 transition: "background 0.3s",
               }}
             />
@@ -188,13 +188,13 @@ export default function IntakeWizard({ onBack, onComplete }) {
             alignItems: "center",
             gap: 14,
             padding: "16px 20px",
-            borderColor: "#3B82F630",
+            borderColor: "#05966930",
           }}
         >
           <Spinner size={20} />
           <div>
-            <div style={{ fontSize: 14, fontWeight: 500, color: "#EFF6FF" }}>Analyzing your denial...</div>
-            <div style={{ fontSize: 12, color: "#6B7280", marginTop: 3 }}>
+            <div style={{ fontSize: 14, fontWeight: 500, color: "#0F172A" }}>Analyzing your denial...</div>
+            <div style={{ fontSize: 12, color: "#64748B", marginTop: 3 }}>
               Building legal strategy and calculating win probability
             </div>
           </div>

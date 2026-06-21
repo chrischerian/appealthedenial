@@ -3,7 +3,7 @@ import { Btn, Badge, Card, SectionLabel } from "../components/ui.jsx";
 const RIGHTS = [
   {
     title: "Right to Appeal",
-    color: "#3B82F6",
+    color: "#059669",
     law: "ACA § 2719",
     body: "Under the ACA, you have the right to appeal any denial. Internal appeals must be resolved in 30 days (urgent care) or 60 days (standard). The insurer must provide a written explanation.",
   },
@@ -27,7 +27,7 @@ const RIGHTS = [
   },
   {
     title: "Peer-to-Peer Review",
-    color: "#3B82F6",
+    color: "#059669",
     law: "State regulations vary",
     body: "Your treating physician can request a direct call with the insurance medical director who denied the claim. This single conversation reverses a significant percentage of denials.",
   },
@@ -59,7 +59,7 @@ export default function RightsGuide() {
     <div>
       <div style={{ marginBottom: 28 }}>
         <h2 style={{ fontSize: 22, fontWeight: 600, marginBottom: 4 }}>Know Your Rights</h2>
-        <p style={{ color: "#6B7280", fontSize: 14 }}>
+        <p style={{ color: "#64748B", fontSize: 14 }}>
           Federal and state laws that protect you from wrongful insurance denials.
         </p>
       </div>
@@ -68,15 +68,15 @@ export default function RightsGuide() {
         {RIGHTS.map((r) => (
           <Card key={r.title}>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12, flexWrap: "wrap" }}>
-              <div style={{ fontWeight: 500, color: "#EFF6FF" }}>{r.title}</div>
+              <div style={{ fontWeight: 500, color: "#0F172A" }}>{r.title}</div>
               <Badge color={r.color}>{r.law}</Badge>
             </div>
-            <p style={{ fontSize: 14, color: "#9CA3AF", lineHeight: 1.7 }}>{r.body}</p>
+            <p style={{ fontSize: 14, color: "#64748B", lineHeight: 1.7 }}>{r.body}</p>
           </Card>
         ))}
       </div>
 
-      <h3 style={{ fontSize: 16, fontWeight: 600, marginBottom: 14, color: "#EFF6FF" }}>Call Scripts</h3>
+      <h3 style={{ fontSize: 16, fontWeight: 600, marginBottom: 14, color: "#0F172A" }}>Call Scripts</h3>
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
         {SCRIPTS.map((s) => (
           <Card key={s.title}>
@@ -85,9 +85,9 @@ export default function RightsGuide() {
               style={{
                 fontFamily: "'IBM Plex Mono', monospace",
                 fontSize: 13,
-                color: "#93c5fd",
+                color: "#34D399",
                 lineHeight: 1.8,
-                background: "#070c18",
+                background: "#F8FAFC",
                 borderRadius: 8,
                 padding: "14px 16px",
                 marginBottom: 12,

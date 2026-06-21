@@ -9,8 +9,8 @@ function StatusDot({ active, done, color }) {
     <div
       style={{
         width: 16, height: 16, borderRadius: "50%", flexShrink: 0,
-        background: done ? "#10B981" : active ? color : "#1a2640",
-        border: `2px solid ${done ? "#10B981" : active ? color : "#1a2640"}`,
+        background: done ? "#10B981" : active ? color : "#E2E8F0",
+        border: `2px solid ${done ? "#10B981" : active ? color : "#E2E8F0"}`,
         transition: "background 0.4s",
         display: "flex", alignItems: "center", justifyContent: "center",
       }}
@@ -62,14 +62,14 @@ export default function Status({ email: initialEmail, navigate }) {
     >
       <div style={{ width: "100%", maxWidth: 520 }}>
         {/* Logo */}
-        <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: 3, textTransform: "uppercase", color: "#3B82F6", marginBottom: 40, textAlign: "center" }}>
+        <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: 3, textTransform: "uppercase", color: "#059669", marginBottom: 40, textAlign: "center" }}>
             AppealTheDenial
         </div>
 
-        <h2 style={{ fontSize: 26, fontWeight: 700, letterSpacing: -0.5, marginBottom: 8, color: "#EFF6FF" }}>
+        <h2 style={{ fontSize: 26, fontWeight: 700, letterSpacing: -0.5, marginBottom: 8, color: "#0F172A" }}>
           Case Status
         </h2>
-        <p style={{ color: "#6B7280", fontSize: 14, marginBottom: 32 }}>
+        <p style={{ color: "#64748B", fontSize: 14, marginBottom: 32 }}>
           Enter the email you used when submitting your denial.
         </p>
 
@@ -87,7 +87,7 @@ export default function Status({ email: initialEmail, navigate }) {
             onClick={handleLookup}
             disabled={loading || !inputEmail.trim()}
             style={{
-              background: "#3B82F6", color: "#fff", border: "none",
+              background: "#059669", color: "#fff", border: "none",
               borderRadius: 8, padding: "10px 20px", fontSize: 14,
               fontWeight: 500, cursor: "pointer", fontFamily: "inherit",
               opacity: loading || !inputEmail.trim() ? 0.5 : 1,
@@ -106,21 +106,21 @@ export default function Status({ email: initialEmail, navigate }) {
 
         {/* Results */}
         {!loading && email && cases.length === 0 && (
-          <div style={{ textAlign: "center", padding: "32px 20px", color: "#4B5563", fontSize: 14 }}>
-            No cases found for <strong style={{ color: "#9CA3AF" }}>{email}</strong>.
+          <div style={{ textAlign: "center", padding: "32px 20px", color: "#94A3B8", fontSize: 14 }}>
+            No cases found for <strong style={{ color: "#64748B" }}>{email}</strong>.
             <br />Make sure you used the same email address.
           </div>
         )}
 
         {cases.map((c) => {
-          const info = STATUS_MAP[c.status] || { label: c.status, color: "#6B7280", step: 0, msg: "" };
+          const info = STATUS_MAP[c.status] || { label: c.status, color: "#64748B", step: 0, msg: "" };
           const step = info.step;
           return (
             <div
               key={c.id}
               style={{
-                background: "#0f1827",
-                border: "1px solid #1a2640",
+                background: "#FFFFFF",
+                border: "1px solid #E2E8F0",
                 borderRadius: 14,
                 padding: 24,
                 marginBottom: 16,
@@ -128,10 +128,10 @@ export default function Status({ email: initialEmail, navigate }) {
             >
               {/* Case header */}
               <div style={{ marginBottom: 24 }}>
-                <div style={{ fontWeight: 600, fontSize: 16, color: "#EFF6FF", marginBottom: 4 }}>
+                <div style={{ fontWeight: 600, fontSize: 16, color: "#0F172A", marginBottom: 4 }}>
                   {c.procedure || "Denied claim"}
                 </div>
-                <div style={{ fontSize: 13, color: "#6B7280" }}>
+                <div style={{ fontSize: 13, color: "#64748B" }}>
                   {c.insurer}{c.created_at ? ` · Submitted ${fmtDate(c.created_at)}` : ""}
                 </div>
               </div>
@@ -142,14 +142,14 @@ export default function Status({ email: initialEmail, navigate }) {
                   <div key={label} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center" }}>
                     <div style={{ display: "flex", alignItems: "center", width: "100%" }}>
                       {i > 0 && (
-                        <div style={{ flex: 1, height: 2, background: i <= step ? info.color : "#1a2640", transition: "background 0.4s" }} />
+                        <div style={{ flex: 1, height: 2, background: i <= step ? info.color : "#E2E8F0", transition: "background 0.4s" }} />
                       )}
                       <StatusDot active={i === step} done={i < step} color={info.color} />
                       {i < STEPS.length - 1 && (
-                        <div style={{ flex: 1, height: 2, background: i < step ? info.color : "#1a2640", transition: "background 0.4s" }} />
+                        <div style={{ flex: 1, height: 2, background: i < step ? info.color : "#E2E8F0", transition: "background 0.4s" }} />
                       )}
                     </div>
-                    <div style={{ fontSize: 11, color: i <= step ? "#9CA3AF" : "#374151", marginTop: 8, textAlign: "center" }}>
+                    <div style={{ fontSize: 11, color: i <= step ? "#64748B" : "#CBD5E1", marginTop: 8, textAlign: "center" }}>
                       {label}
                     </div>
                   </div>
@@ -178,7 +178,7 @@ export default function Status({ email: initialEmail, navigate }) {
         <div style={{ textAlign: "center", marginTop: 32 }}>
           <button
             onClick={() => navigate("/")}
-            style={{ background: "none", border: "none", color: "#374151", fontSize: 13, cursor: "pointer", fontFamily: "inherit" }}
+            style={{ background: "none", border: "none", color: "#CBD5E1", fontSize: 13, cursor: "pointer", fontFamily: "inherit" }}
           >
             &larr; Back to home
           </button>

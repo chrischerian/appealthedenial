@@ -36,12 +36,12 @@ export default function ProviderLanding({ navigate }) {
         className="mob-nav"
         style={{
           display: "flex", alignItems: "center", justifyContent: "space-between",
-          padding: "20px 40px", borderBottom: "1px solid #0f1827",
+          padding: "20px 40px", borderBottom: "1px solid #E2E8F0",
           position: "sticky", top: 0, zIndex: 10,
-          background: "rgba(9,13,24,0.92)", backdropFilter: "blur(12px)",
+          background: "rgba(255,255,255,0.85)", backdropFilter: "blur(12px)",
         }}
       >
-        <div style={{ fontSize: 15, fontWeight: 700, letterSpacing: -0.3, color: "#EFF6FF" }}>
+        <div style={{ fontSize: 15, fontWeight: 700, letterSpacing: -0.3, color: "#0F172A" }}>
           Appeal<span style={{ color: "#10b981" }}>TheDenial</span>
         </div>
         <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
@@ -49,13 +49,13 @@ export default function ProviderLanding({ navigate }) {
             onClick={() => navigate("/patients")}
             className="mob-hide"
             style={{
-              background: "transparent", border: "1px solid #1a2640",
-              color: "#9CA3AF", borderRadius: 8, padding: "8px 16px",
+              background: "transparent", border: "1px solid #E2E8F0",
+              color: "#64748B", borderRadius: 8, padding: "8px 16px",
               fontSize: 14, cursor: "pointer", fontFamily: "inherit",
               transition: "border-color 0.15s, color 0.15s",
             }}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#10b981"; e.currentTarget.style.color = "#EFF6FF"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#1a2640"; e.currentTarget.style.color = "#9CA3AF"; }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#10b981"; e.currentTarget.style.color = "#0F172A"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#E2E8F0"; e.currentTarget.style.color = "#64748B"; }}
           >
             For patients
           </button>
@@ -100,7 +100,7 @@ export default function ProviderLanding({ navigate }) {
             fontSize: "clamp(38px, 6vw, 66px)",
             fontWeight: 700, lineHeight: 1.06,
             letterSpacing: -2, marginBottom: 28,
-            color: "#EFF6FF",
+            color: "#0F172A",
           }}
         >
           We handle every insurance
@@ -111,7 +111,7 @@ export default function ProviderLanding({ navigate }) {
         <p
           style={{
             fontSize: "clamp(16px, 2vw, 19px)",
-            color: "#6B7280", lineHeight: 1.75,
+            color: "#64748B", lineHeight: 1.75,
             maxWidth: 540, margin: "0 auto 48px",
           }}
         >
@@ -143,7 +143,7 @@ export default function ProviderLanding({ navigate }) {
           <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: 3, textTransform: "uppercase", color: "#10b981", marginBottom: 12 }}>
             How it works
           </div>
-          <h2 style={{ fontSize: "clamp(28px, 4vw, 40px)", fontWeight: 700, letterSpacing: -1, color: "#EFF6FF" }}>
+          <h2 style={{ fontSize: "clamp(28px, 4vw, 40px)", fontWeight: 700, letterSpacing: -1, color: "#0F172A" }}>
             You refer it. We handle it.
           </h2>
         </div>
@@ -153,30 +153,30 @@ export default function ProviderLanding({ navigate }) {
             <div
               key={item.step}
               style={{
-                background: "#0f1827", border: "1px solid #1a2640",
+                background: "#FFFFFF", border: "1px solid #E2E8F0",
                 borderRadius: 16, padding: "28px 24px",
               }}
             >
               <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: "#10b981", marginBottom: 16, textTransform: "uppercase" }}>
                 Step {item.step}
               </div>
-              <div style={{ fontSize: 17, fontWeight: 600, color: "#EFF6FF", marginBottom: 10, lineHeight: 1.3 }}>
+              <div style={{ fontSize: 17, fontWeight: 600, color: "#0F172A", marginBottom: 10, lineHeight: 1.3 }}>
                 {item.title}
               </div>
-              <p style={{ fontSize: 14, color: "#6B7280", lineHeight: 1.7 }}>{item.desc}</p>
+              <p style={{ fontSize: 14, color: "#64748B", lineHeight: 1.7 }}>{item.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* ── Denial types ─────────────────────────────────────────────────────── */}
-      <section style={{ background: "#070c18", borderTop: "1px solid #0f1827", borderBottom: "1px solid #0f1827" }}>
+      <section style={{ background: "#F8FAFC", borderTop: "1px solid #E2E8F0", borderBottom: "1px solid #E2E8F0" }}>
         <div className="mob-sec" style={{ maxWidth: 900, margin: "0 auto", padding: "80px 24px" }}>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: 3, textTransform: "uppercase", color: "#10b981", marginBottom: 12 }}>
               What we handle
             </div>
-            <h2 style={{ fontSize: "clamp(26px, 4vw, 36px)", fontWeight: 700, letterSpacing: -1, color: "#EFF6FF" }}>
+            <h2 style={{ fontSize: "clamp(26px, 4vw, 36px)", fontWeight: 700, letterSpacing: -1, color: "#0F172A" }}>
               Every major denial type, covered
             </h2>
           </div>
@@ -186,7 +186,7 @@ export default function ProviderLanding({ navigate }) {
               <div
                 key={d.label}
                 style={{
-                  background: "#0f1827", border: "1px solid #1a2640",
+                  background: "#FFFFFF", border: "1px solid #E2E8F0",
                   borderRadius: 12, padding: "18px 16px",
                 }}
               >
@@ -201,7 +201,7 @@ export default function ProviderLanding({ navigate }) {
                 >
                   {d.label}
                 </div>
-                <p style={{ fontSize: 13, color: "#6B7280", lineHeight: 1.6 }}>{d.desc}</p>
+                <p style={{ fontSize: 13, color: "#64748B", lineHeight: 1.6 }}>{d.desc}</p>
               </div>
             ))}
           </div>
@@ -211,10 +211,10 @@ export default function ProviderLanding({ navigate }) {
       {/* ── What you get ─────────────────────────────────────────────────────── */}
       <section className="mob-sec" style={{ maxWidth: 900, margin: "0 auto", padding: "80px 24px" }}>
         <div style={{ textAlign: "center", marginBottom: 40 }}>
-          <h2 style={{ fontSize: "clamp(24px, 3vw, 34px)", fontWeight: 700, letterSpacing: -0.5, color: "#EFF6FF", marginBottom: 8 }}>
+          <h2 style={{ fontSize: "clamp(24px, 3vw, 34px)", fontWeight: 700, letterSpacing: -0.5, color: "#0F172A", marginBottom: 8 }}>
             What you get
           </h2>
-          <p style={{ fontSize: 15, color: "#6B7280" }}>Everything needed to fight a denial, handled entirely on our end.</p>
+          <p style={{ fontSize: 15, color: "#64748B" }}>Everything needed to fight a denial, handled entirely on our end.</p>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 16 }}>
           {[
@@ -226,24 +226,24 @@ export default function ProviderLanding({ navigate }) {
             <div
               key={t.title}
               style={{
-                background: "#0f1827", border: "1px solid #1a2640",
+                background: "#FFFFFF", border: "1px solid #E2E8F0",
                 borderRadius: 14, padding: "24px 20px",
               }}
             >
-              <div style={{ fontSize: 15, fontWeight: 600, color: "#EFF6FF", marginBottom: 8 }}>{t.title}</div>
-              <p style={{ fontSize: 13, color: "#6B7280", lineHeight: 1.7 }}>{t.desc}</p>
+              <div style={{ fontSize: 15, fontWeight: 600, color: "#0F172A", marginBottom: 8 }}>{t.title}</div>
+              <p style={{ fontSize: 13, color: "#64748B", lineHeight: 1.7 }}>{t.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* ── Final CTA ────────────────────────────────────────────────────────── */}
-      <section style={{ background: "#070c18", borderTop: "1px solid #0f1827" }}>
+      <section style={{ background: "#F8FAFC", borderTop: "1px solid #E2E8F0" }}>
         <div className="mob-sec" style={{ maxWidth: 700, margin: "0 auto", padding: "96px 24px", textAlign: "center" }}>
-          <h2 style={{ fontSize: "clamp(30px, 5vw, 48px)", fontWeight: 700, letterSpacing: -1.5, color: "#EFF6FF", marginBottom: 16 }}>
+          <h2 style={{ fontSize: "clamp(30px, 5vw, 48px)", fontWeight: 700, letterSpacing: -1.5, color: "#0F172A", marginBottom: 16 }}>
             Let's talk.
           </h2>
-          <p style={{ fontSize: 17, color: "#6B7280", lineHeight: 1.65, marginBottom: 40, maxWidth: 420, margin: "0 auto 40px" }}>
+          <p style={{ fontSize: 17, color: "#64748B", lineHeight: 1.65, marginBottom: 40, maxWidth: 420, margin: "0 auto 40px" }}>
             If you're dealing with a high volume of denied claims and want a partner to handle them, reach out and we'll set up a call.
           </p>
           <a
@@ -268,19 +268,19 @@ export default function ProviderLanding({ navigate }) {
       <footer
         className="mob-nav"
         style={{
-          borderTop: "1px solid #0f1827", padding: "28px 40px",
+          borderTop: "1px solid #E2E8F0", padding: "28px 40px",
           display: "flex", alignItems: "center", justifyContent: "space-between",
           flexWrap: "wrap", gap: 12,
         }}
       >
-        <div style={{ fontSize: 13, fontWeight: 600, color: "#EFF6FF" }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: "#0F172A" }}>
           Appeal<span style={{ color: "#10b981" }}>TheDenial</span>
         </div>
         <button
           onClick={() => navigate("/patients")}
           style={{
             background: "none", border: "none", cursor: "pointer",
-            fontSize: 13, color: "#4B5563", fontFamily: "inherit",
+            fontSize: 13, color: "#94A3B8", fontFamily: "inherit",
             textDecoration: "underline",
           }}
         >
@@ -288,7 +288,7 @@ export default function ProviderLanding({ navigate }) {
         </button>
         <a
           href="/admin"
-          style={{ fontSize: 11, color: "#1e2d42", textDecoration: "none" }}
+          style={{ fontSize: 11, color: "#94A3B8", textDecoration: "none" }}
           onClick={(e) => { e.preventDefault(); navigate("/admin"); }}
         >
           Admin

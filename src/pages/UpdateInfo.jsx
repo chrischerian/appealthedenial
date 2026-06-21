@@ -78,7 +78,7 @@ export default function UpdateInfo({ navigate, token: tokenProp }) {
   const Wrap = ({ children }) => (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "40px 24px" }}>
       <div style={{ width: "100%", maxWidth: 480 }}>
-        <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: 3, textTransform: "uppercase", color: "#3B82F6", marginBottom: 28, textAlign: "center" }}>
+        <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: 3, textTransform: "uppercase", color: "#059669", marginBottom: 28, textAlign: "center" }}>
             AppealTheDenial
         </div>
         {children}
@@ -89,7 +89,7 @@ export default function UpdateInfo({ navigate, token: tokenProp }) {
   if (loading) {
     return (
       <Wrap>
-        <div style={{ textAlign: "center", color: "#6B7280", fontSize: 14 }}>Loading your case…</div>
+        <div style={{ textAlign: "center", color: "#64748B", fontSize: 14 }}>Loading your case…</div>
       </Wrap>
     );
   }
@@ -100,12 +100,12 @@ export default function UpdateInfo({ navigate, token: tokenProp }) {
         <div style={{ background: "#EF444412", border: "1px solid #EF444430", borderRadius: 10, padding: "20px 24px", textAlign: "center" }}>
           <div style={{ fontSize: 24, marginBottom: 12 }}>⚠️</div>
           <div style={{ fontSize: 15, color: "#EF4444", fontWeight: 500, marginBottom: 8 }}>{error}</div>
-          <div style={{ fontSize: 13, color: "#6B7280" }}>
+          <div style={{ fontSize: 13, color: "#64748B" }}>
             Try clicking the link in your email again, or reply to that email with the missing information.
           </div>
         </div>
         <div style={{ textAlign: "center", marginTop: 24 }}>
-          <button onClick={() => navigate("/")} style={{ background: "none", border: "none", color: "#4B5563", fontSize: 13, cursor: "pointer", fontFamily: "inherit" }}>
+          <button onClick={() => navigate("/")} style={{ background: "none", border: "none", color: "#94A3B8", fontSize: 13, cursor: "pointer", fontFamily: "inherit" }}>
             ← Back to home
           </button>
         </div>
@@ -120,11 +120,11 @@ export default function UpdateInfo({ navigate, token: tokenProp }) {
           <div style={{ width: 64, height: 64, borderRadius: "50%", background: "#10B98118", border: "1px solid #10B98130", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 24px", fontSize: 24 }}>
             ✓
           </div>
-          <h2 style={{ fontSize: 26, fontWeight: 700, color: "#EFF6FF", marginBottom: 12 }}>We've got it.</h2>
-          <p style={{ fontSize: 15, color: "#6B7280", lineHeight: 1.7, marginBottom: 32 }}>
+          <h2 style={{ fontSize: 26, fontWeight: 700, color: "#0F172A", marginBottom: 12 }}>We've got it.</h2>
+          <p style={{ fontSize: 15, color: "#64748B", lineHeight: 1.7, marginBottom: 32 }}>
             Your information has been received. We're reprocessing your case now and will email you when your appeal letter is ready.
           </p>
-          <button onClick={() => navigate("/")} style={{ background: "none", border: "none", color: "#374151", fontSize: 13, cursor: "pointer", fontFamily: "inherit" }}>
+          <button onClick={() => navigate("/")} style={{ background: "none", border: "none", color: "#CBD5E1", fontSize: 13, cursor: "pointer", fontFamily: "inherit" }}>
             ← Back to home
           </button>
         </div>
@@ -137,9 +137,9 @@ export default function UpdateInfo({ navigate, token: tokenProp }) {
   return (
     <Wrap>
       <div style={{ marginBottom: 28 }}>
-        <h2 style={{ fontSize: 24, fontWeight: 700, color: "#EFF6FF", marginBottom: 8 }}>We need a few more details</h2>
-        <p style={{ fontSize: 14, color: "#6B7280", lineHeight: 1.65 }}>
-          To write a complete appeal for your <strong style={{ color: "#9CA3AF" }}>{meta?.procedure}</strong> denial from <strong style={{ color: "#9CA3AF" }}>{meta?.insurer}</strong>, we need the following:
+        <h2 style={{ fontSize: 24, fontWeight: 700, color: "#0F172A", marginBottom: 8 }}>We need a few more details</h2>
+        <p style={{ fontSize: 14, color: "#64748B", lineHeight: 1.65 }}>
+          To write a complete appeal for your <strong style={{ color: "#64748B" }}>{meta?.procedure}</strong> denial from <strong style={{ color: "#64748B" }}>{meta?.insurer}</strong>, we need the following:
         </p>
       </div>
 
@@ -149,7 +149,7 @@ export default function UpdateInfo({ navigate, token: tokenProp }) {
         </div>
       )}
 
-      <div style={{ background: "#0f1827", border: "1px solid #1a2640", borderRadius: 14, padding: 24, marginBottom: 20 }}>
+      <div style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: 14, padding: 24, marginBottom: 20 }}>
         {fieldKeys.length === 0 ? (
           // Fallback: show all fields if we can't match
           Object.entries(FIELD_META).slice(0, 4).map(([key, meta]) => (
@@ -168,18 +168,18 @@ export default function UpdateInfo({ navigate, token: tokenProp }) {
         onClick={handleSubmit}
         disabled={submitting}
         style={{
-          width: "100%", background: submitting ? "#1a2640" : "#3B82F6",
-          color: submitting ? "#4B5563" : "#fff",
+          width: "100%", background: submitting ? "#E2E8F0" : "#059669",
+          color: submitting ? "#94A3B8" : "#fff",
           border: "none", borderRadius: 9, padding: "14px 0",
           fontSize: 15, fontWeight: 600, cursor: submitting ? "not-allowed" : "pointer",
           fontFamily: "inherit", display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
         }}
       >
-        {submitting && <span style={{ width: 14, height: 14, border: "2px solid #4B5563", borderTopColor: "#9CA3AF", borderRadius: "50%", display: "inline-block", animation: "spin 0.7s linear infinite" }} />}
+        {submitting && <span style={{ width: 14, height: 14, border: "2px solid #94A3B8", borderTopColor: "#64748B", borderRadius: "50%", display: "inline-block", animation: "spin 0.7s linear infinite" }} />}
         {submitting ? "Submitting…" : "Submit & complete my appeal →"}
       </button>
 
-      <p style={{ textAlign: "center", marginTop: 14, fontSize: 12, color: "#374151" }}>
+      <p style={{ textAlign: "center", marginTop: 14, fontSize: 12, color: "#CBD5E1" }}>
         Or simply reply to the email you received with this information.
       </p>
     </Wrap>
@@ -189,7 +189,7 @@ export default function UpdateInfo({ navigate, token: tokenProp }) {
 function FieldInput({ fieldKey, meta, value, onChange }) {
   return (
     <div style={{ marginBottom: 18 }}>
-      <label style={{ display: "block", fontSize: 13, color: "#9CA3AF", marginBottom: 6, fontWeight: 500 }}>
+      <label style={{ display: "block", fontSize: 13, color: "#64748B", marginBottom: 6, fontWeight: 500 }}>
         {meta.label}
       </label>
       {meta.type === "textarea" ? (
