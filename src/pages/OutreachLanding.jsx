@@ -115,17 +115,6 @@ export default function OutreachLanding({ navigate }) {
 
         {/* Left — copy */}
         <div style={{ flex: "1 1 440px", maxWidth: 600 }}>
-          <div style={{
-            display: "inline-block",
-            background: "#10b9811a", color: blue,
-            border: `1px solid #10b9813a`,
-            borderRadius: 100, padding: "5px 16px",
-            fontSize: 12, fontWeight: 600, letterSpacing: 1,
-            textTransform: "uppercase", marginBottom: 24,
-          }}>
-            For practice managers &amp; office admins
-          </div>
-
           <h1 style={{
             fontSize: "clamp(40px, 5.4vw, 66px)",
             fontWeight: 700, lineHeight: 1.04,
@@ -140,7 +129,7 @@ export default function OutreachLanding({ navigate }) {
             color: textLow, lineHeight: 1.6,
             maxWidth: 520,
           }}>
-            We handle the entire appeals process for your patients — writing, filing, and following up — so your team can focus on care, not paperwork.
+            We handle the entire appeals process for your patients. Writing, filing, following up. Your team focuses on care, not paperwork.
           </p>
         </div>
 
