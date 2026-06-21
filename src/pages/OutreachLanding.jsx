@@ -46,7 +46,7 @@ const STEPS = [
   },
 ];
 
-export default function OutreachLanding({ navigate }) {
+export default function OutreachLanding() {
   const [form, setForm]     = useState({ name: "", email: "" });
   const [status, setStatus] = useState("idle"); // idle | sending | done | error
 
@@ -94,19 +94,6 @@ export default function OutreachLanding({ navigate }) {
         <div style={{ fontSize: 15, fontWeight: 700, letterSpacing: -0.3, color: textHi }}>
           Appeal<span style={{ color: blue }}>TheDenial</span>
         </div>
-        <button
-          onClick={() => navigate("/patients")}
-          className="mob-hide"
-          style={{
-            background: "transparent", border: `1px solid ${border}`,
-            color: textLow, borderRadius: 8, padding: "8px 16px",
-            fontSize: 14, cursor: "pointer", fontFamily: "inherit",
-          }}
-          onMouseEnter={e => { e.currentTarget.style.borderColor = blue; e.currentTarget.style.color = textHi; }}
-          onMouseLeave={e => { e.currentTarget.style.borderColor = border; e.currentTarget.style.color = textLow; }}
-        >
-          For patients
-        </button>
       </nav>
 
       {/* ── Hero (form front-and-center) ─────────────────────────────────────── */}
@@ -287,18 +274,6 @@ export default function OutreachLanding({ navigate }) {
         <div style={{ fontSize: 13, fontWeight: 600, color: textHi }}>
           Appeal<span style={{ color: blue }}>TheDenial</span>
         </div>
-        <button
-          onClick={() => navigate("/providers")}
-          style={{ background: "none", border: "none", cursor: "pointer", fontSize: 13, color: "#94A3B8", fontFamily: "inherit" }}
-        >
-          For providers →
-        </button>
-        <button
-          onClick={() => navigate("/patients")}
-          style={{ background: "none", border: "none", cursor: "pointer", fontSize: 13, color: "#94A3B8", fontFamily: "inherit" }}
-        >
-          For patients →
-        </button>
       </footer>
 
     </div>

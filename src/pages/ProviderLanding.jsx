@@ -70,20 +70,6 @@ export default function ProviderLanding({ navigate }) {
           Appeal<span style={{ color: "#10b981" }}>TheDenial</span>
         </div>
         <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-          <button
-            onClick={() => navigate("/patients")}
-            className="mob-hide"
-            style={{
-              background: "transparent", border: "1px solid #E2E8F0",
-              color: "#64748B", borderRadius: 8, padding: "8px 16px",
-              fontSize: 14, cursor: "pointer", fontFamily: "inherit",
-              transition: "border-color 0.15s, color 0.15s",
-            }}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#10b981"; e.currentTarget.style.color = "#0F172A"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#E2E8F0"; e.currentTarget.style.color = "#64748B"; }}
-          >
-            For patients
-          </button>
           <a
             href="mailto:willjhooper@msn.com"
             style={{
@@ -367,16 +353,6 @@ export default function ProviderLanding({ navigate }) {
         <div style={{ fontSize: 13, fontWeight: 600, color: "#0F172A" }}>
           Appeal<span style={{ color: "#10b981" }}>TheDenial</span>
         </div>
-        <button
-          onClick={() => navigate("/patients")}
-          style={{
-            background: "none", border: "none", cursor: "pointer",
-            fontSize: 13, color: "#94A3B8", fontFamily: "inherit",
-            textDecoration: "underline",
-          }}
-        >
-          For patients →
-        </button>
         <a
           href="/admin"
           style={{ fontSize: 11, color: "#94A3B8", textDecoration: "none" }}
