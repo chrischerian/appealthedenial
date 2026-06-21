@@ -137,7 +137,7 @@ export default function ProviderLanding({ navigate }) {
               maxWidth: 540,
             }}
           >
-            We take over the appeals process end-to-end — writing, filing, and following up on denied claims on behalf of your patients, so your staff doesn't have to.
+            We take over the entire appeals process. We write, file, and follow up on denied claims for your patients, so your staff doesn't have to.
           </p>
         </div>
 
@@ -159,17 +159,14 @@ export default function ProviderLanding({ navigate }) {
             </div>
           ) : (
             <>
-              <div style={{ fontSize: 16, fontWeight: 700, color: "#0F172A", marginBottom: 4, textAlign: "center" }}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: "#0F172A", marginBottom: 20, textAlign: "center" }}>
                 Get started in 30 seconds.
               </div>
-              <p style={{ fontSize: 13, color: "#64748B", marginBottom: 20, textAlign: "center" }}>
-                Drop your info and we'll reach out within one business day.
-              </p>
               <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                 {/* Plan selector — required before submit */}
                 <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                  <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: 1, textTransform: "uppercase", color: "#64748B", marginBottom: 2 }}>
-                    Which pricing fits you?
+                  <div style={{ fontSize: 13, color: "#64748B", marginBottom: 2 }}>
+                    How would you want to pay?
                   </div>
                   {PLANS.map((p) => {
                     const active = form.selectedPlan === p.value;
@@ -185,20 +182,17 @@ export default function ProviderLanding({ navigate }) {
                           textAlign: "left", cursor: "pointer", fontFamily: "inherit",
                           background: active ? "#10b9811a" : "#FFFFFF",
                           border: active ? "1.5px solid #10b981" : "1px solid #E2E8F0",
-                          borderRadius: 12, padding: "12px 14px",
-                          display: "flex", alignItems: "flex-start", gap: 10,
+                          borderRadius: 10, padding: "10px 14px",
+                          display: "flex", alignItems: "center", gap: 10,
                           transition: "border-color 0.15s, background 0.15s",
                         }}
                       >
                         <span style={{
-                          width: 18, height: 18, borderRadius: "50%", flexShrink: 0, marginTop: 1,
+                          width: 16, height: 16, borderRadius: "50%", flexShrink: 0,
                           border: active ? "5px solid #10b981" : "2px solid #CBD5E1",
                           background: "#FFFFFF", transition: "border 0.15s",
                         }} />
-                        <span>
-                          <span style={{ display: "block", fontSize: 14, fontWeight: 600, color: "#0F172A" }}>{p.title}</span>
-                          <span style={{ display: "block", fontSize: 12.5, color: "#64748B", lineHeight: 1.5, marginTop: 2 }}>{p.desc}</span>
-                        </span>
+                        <span style={{ fontSize: 14, fontWeight: 600, color: "#0F172A" }}>{p.title}</span>
                       </button>
                     );
                   })}
