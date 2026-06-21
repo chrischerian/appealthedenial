@@ -53,7 +53,12 @@ export default function ProviderLanding({ navigate }) {
           _captcha: "false",
         }),
       });
-      setStatus(res.ok ? "done" : "error");
+      if (res.ok) {
+        if (window.fbq) window.fbq("trackCustom", "LeadSubmitted", { plan: form.selectedPlan });
+        setStatus("done");
+      } else {
+        setStatus("error");
+      }
     } catch {
       setStatus("error");
     }
@@ -172,7 +177,10 @@ export default function ProviderLanding({ navigate }) {
                       <button
                         type="button"
                         key={p.value}
-                        onClick={() => setForm((f) => ({ ...f, selectedPlan: p.value }))}
+                        onClick={() => {
+                          setForm((f) => ({ ...f, selectedPlan: p.value }));
+                          if (window.fbq) window.fbq("trackCustom", "PlanSelected", { plan: p.value });
+                        }}
                         style={{
                           textAlign: "left", cursor: "pointer", fontFamily: "inherit",
                           background: active ? "#10b9811a" : "#FFFFFF",
