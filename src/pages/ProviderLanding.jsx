@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const DENIAL_TYPES = [
   { label: "Medical Necessity",   desc: "We challenge the denial on clinical grounds with a formal letter citing applicable standards of care." },
   { label: "Prior Authorization", desc: "We request retroactive authorization and argue medical urgency on the patient's behalf." },
@@ -28,6 +30,29 @@ const HOW_IT_WORKS = [
 ];
 
 export default function ProviderLanding({ navigate }) {
+  const [form, setForm]     = useState({ name: "", email: "" });
+  const [status, setStatus] = useState("idle"); // idle | sending | done | error
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setStatus("sending");
+    try {
+      const res = await fetch("https://formsubmit.co/ajax/will@solognecourtholdings.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name:  form.name,
+          email: form.email,
+          _subject: "New lead from AppealTheDenial.com (providers)",
+          _captcha: "false",
+        }),
+      });
+      setStatus(res.ok ? "done" : "error");
+    } catch {
+      setStatus("error");
+    }
+  }
+
   return (
     <div style={{ fontFamily: "'DM Sans', sans-serif" }}>
 
@@ -74,11 +99,11 @@ export default function ProviderLanding({ navigate }) {
         </div>
       </nav>
 
-      {/* ── Hero ─────────────────────────────────────────────────────────────── */}
+      {/* ── Hero (form front-and-center) ─────────────────────────────────────── */}
       <section
         className="mob-hero"
         style={{
-          maxWidth: 780, margin: "0 auto", padding: "110px 24px 90px",
+          maxWidth: 600, margin: "0 auto", padding: "72px 24px 80px",
           textAlign: "center",
         }}
       >
@@ -89,7 +114,7 @@ export default function ProviderLanding({ navigate }) {
             border: "1px solid #10b9813a",
             borderRadius: 100, padding: "5px 16px",
             fontSize: 12, fontWeight: 600, letterSpacing: 1,
-            textTransform: "uppercase", marginBottom: 28,
+            textTransform: "uppercase", marginBottom: 24,
           }}
         >
           For healthcare providers
@@ -97,9 +122,9 @@ export default function ProviderLanding({ navigate }) {
 
         <h1
           style={{
-            fontSize: "clamp(38px, 6vw, 66px)",
-            fontWeight: 700, lineHeight: 1.06,
-            letterSpacing: -2, marginBottom: 28,
+            fontSize: "clamp(32px, 5vw, 54px)",
+            fontWeight: 700, lineHeight: 1.07,
+            letterSpacing: -2, marginBottom: 20,
             color: "#0F172A",
           }}
         >
@@ -110,31 +135,93 @@ export default function ProviderLanding({ navigate }) {
 
         <p
           style={{
-            fontSize: "clamp(16px, 2vw, 19px)",
-            color: "#64748B", lineHeight: 1.75,
-            maxWidth: 540, margin: "0 auto 48px",
+            fontSize: "clamp(16px, 2vw, 18px)",
+            color: "#64748B", lineHeight: 1.7,
+            maxWidth: 540, margin: "0 auto 36px",
           }}
         >
           We take over the appeals process end-to-end — writing, filing, and following up on denied claims on behalf of your patients, so your staff doesn't have to.
         </p>
 
-        <a
-          href="mailto:willjhooper@msn.com"
-          className="mob-cta"
+        {/* Lead form */}
+        <div
           style={{
-            display: "inline-block",
-            background: "#10b981", color: "#fff", border: "none",
-            borderRadius: 12, padding: "18px 44px",
-            fontSize: 17, fontWeight: 600, cursor: "pointer",
-            letterSpacing: -0.2, fontFamily: "inherit", textDecoration: "none",
-            boxShadow: "0 0 40px #10b98140",
-            transition: "background 0.15s, transform 0.1s",
+            maxWidth: 440, margin: "0 auto",
+            background: "#FFFFFF", border: "1px solid #E2E8F0",
+            borderRadius: 18, padding: "28px 24px",
+            boxShadow: "0 10px 40px rgba(15,23,42,0.06), 0 2px 8px rgba(15,23,42,0.04)",
+            textAlign: "left",
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.background = "#059669"; e.currentTarget.style.transform = "translateY(-2px)"; }}
-          onMouseLeave={(e) => { e.currentTarget.style.background = "#10b981"; e.currentTarget.style.transform = "none"; }}
         >
-          Get in touch →
-        </a>
+          {status === "done" ? (
+            <div style={{ textAlign: "center", padding: "12px 0" }}>
+              <div style={{ fontSize: 32, marginBottom: 12, color: "#059669" }}>✓</div>
+              <div style={{ fontSize: 18, fontWeight: 600, color: "#0F172A", marginBottom: 8 }}>You're on our list.</div>
+              <p style={{ fontSize: 14, color: "#64748B" }}>We'll be in touch within one business day.</p>
+            </div>
+          ) : (
+            <>
+              <div style={{ fontSize: 16, fontWeight: 700, color: "#0F172A", marginBottom: 4, textAlign: "center" }}>
+                Get started in 30 seconds.
+              </div>
+              <p style={{ fontSize: 13, color: "#64748B", marginBottom: 20, textAlign: "center" }}>
+                Drop your info and we'll reach out within one business day.
+              </p>
+              <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                <input
+                  type="text"
+                  placeholder="Your name"
+                  required
+                  value={form.name}
+                  onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                  style={{
+                    background: "#FFFFFF", border: "1px solid #E2E8F0",
+                    borderRadius: 10, padding: "14px 16px",
+                    fontSize: 15, color: "#0F172A", fontFamily: "inherit", outline: "none",
+                  }}
+                  onFocus={(e) => { e.target.style.borderColor = "#10b981"; }}
+                  onBlur={(e) => { e.target.style.borderColor = "#E2E8F0"; }}
+                />
+                <input
+                  type="email"
+                  placeholder="Work email"
+                  required
+                  value={form.email}
+                  onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+                  style={{
+                    background: "#FFFFFF", border: "1px solid #E2E8F0",
+                    borderRadius: 10, padding: "14px 16px",
+                    fontSize: 15, color: "#0F172A", fontFamily: "inherit", outline: "none",
+                  }}
+                  onFocus={(e) => { e.target.style.borderColor = "#10b981"; }}
+                  onBlur={(e) => { e.target.style.borderColor = "#E2E8F0"; }}
+                />
+                <button
+                  type="submit"
+                  disabled={status === "sending"}
+                  style={{
+                    background: "#10b981", color: "#fff", border: "none",
+                    borderRadius: 10, padding: "16px",
+                    fontSize: 16, fontWeight: 600, cursor: status === "sending" ? "wait" : "pointer",
+                    fontFamily: "inherit", letterSpacing: -0.2, width: "100%",
+                    boxShadow: "0 0 30px #10b98140",
+                    opacity: status === "sending" ? 0.7 : 1,
+                  }}
+                >
+                  {status === "sending" ? "Sending…" : "Get in touch →"}
+                </button>
+                {status === "error" && (
+                  <p style={{ fontSize: 13, color: "#f87171", margin: 0, textAlign: "center" }}>
+                    Something went wrong — email us at willjhooper@msn.com
+                  </p>
+                )}
+              </form>
+            </>
+          )}
+        </div>
+        <p style={{ fontSize: 12, color: "#64748B", marginTop: 16 }}>
+          No commitment · We reply within one business day
+        </p>
       </section>
 
       {/* ── How it works ─────────────────────────────────────────────────────── */}
