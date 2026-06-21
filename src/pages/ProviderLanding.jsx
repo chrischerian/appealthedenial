@@ -105,19 +105,6 @@ export default function ProviderLanding({ navigate }) {
 
         {/* Left — copy */}
         <div style={{ flex: "1 1 440px", maxWidth: 600 }}>
-          <div
-            style={{
-              display: "inline-block",
-              background: "#10b9811a", color: "#10b981",
-              border: "1px solid #10b9813a",
-              borderRadius: 100, padding: "5px 16px",
-              fontSize: 12, fontWeight: 600, letterSpacing: 1,
-              textTransform: "uppercase", marginBottom: 24,
-            }}
-          >
-            For healthcare providers
-          </div>
-
           <h1
             style={{
               fontSize: "clamp(40px, 5.4vw, 66px)",
