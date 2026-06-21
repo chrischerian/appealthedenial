@@ -79,7 +79,6 @@ export default function OutreachLanding({ navigate }) {
   const blue     = "#10b981";
   const blueGlow = "#10b98150";
   const textHi   = "#0F172A";
-  const textMid  = "#64748B";
   const textLow  = "#64748B";
 
   return (
@@ -110,23 +109,23 @@ export default function OutreachLanding({ navigate }) {
         </button>
       </nav>
 
-      {/* ── Hero ─────────────────────────────────────────────────────────────── */}
-      <section className="mob-hero" style={{ maxWidth: 760, margin: "0 auto", padding: "100px 24px 80px", textAlign: "center" }}>
+      {/* ── Hero (form front-and-center) ─────────────────────────────────────── */}
+      <section className="mob-hero" style={{ maxWidth: 600, margin: "0 auto", padding: "72px 24px 80px", textAlign: "center" }}>
         <div style={{
           display: "inline-block",
           background: "#10b9811a", color: blue,
           border: `1px solid #10b9813a`,
           borderRadius: 100, padding: "5px 16px",
           fontSize: 12, fontWeight: 600, letterSpacing: 1,
-          textTransform: "uppercase", marginBottom: 28,
+          textTransform: "uppercase", marginBottom: 24,
         }}>
           For practice managers &amp; office admins
         </div>
 
         <h1 style={{
-          fontSize: "clamp(34px, 5.5vw, 58px)",
+          fontSize: "clamp(32px, 5vw, 52px)",
           fontWeight: 700, lineHeight: 1.1,
-          letterSpacing: -2, marginBottom: 24, color: textHi,
+          letterSpacing: -2, marginBottom: 20, color: textHi,
         }}>
           Your staff shouldn't be<br />
           <span style={{ color: blue }}>fighting insurance denials.</span>
@@ -134,30 +133,89 @@ export default function OutreachLanding({ navigate }) {
 
         <p style={{
           fontSize: "clamp(16px, 2vw, 18px)",
-          color: textLow, lineHeight: 1.75,
-          maxWidth: 520, margin: "0 auto 48px",
+          color: textLow, lineHeight: 1.7,
+          maxWidth: 520, margin: "0 auto 36px",
         }}>
           We handle the entire appeals process for your patients — writing, filing, and following up — so your team can focus on care, not paperwork.
         </p>
 
-        <a
-          href="#book"
-          className="mob-cta"
-          onClick={e => { e.preventDefault(); document.getElementById("book").scrollIntoView({ behavior: "smooth" }); }}
-          style={{
-            display: "inline-block",
-            background: blue, color: "#fff",
-            borderRadius: 12, padding: "18px 44px",
-            fontSize: 17, fontWeight: 600,
-            letterSpacing: -0.2, fontFamily: "inherit",
-            textDecoration: "none",
-            boxShadow: `0 0 40px ${blueGlow}`,
-          }}
-          onMouseEnter={e => { e.currentTarget.style.background = "#059669"; e.currentTarget.style.transform = "translateY(-2px)"; }}
-          onMouseLeave={e => { e.currentTarget.style.background = blue; e.currentTarget.style.transform = "none"; }}
-        >
-          Book a 20-min call →
-        </a>
+        {/* Lead form */}
+        <div style={{
+          maxWidth: 440, margin: "0 auto",
+          background: card, border: `1px solid ${border}`,
+          borderRadius: 18, padding: "28px 24px",
+          boxShadow: "0 10px 40px rgba(15,23,42,0.06), 0 2px 8px rgba(15,23,42,0.04)",
+          textAlign: "left",
+        }}>
+          {status === "done" ? (
+            <div style={{ textAlign: "center", padding: "12px 0" }}>
+              <div style={{ fontSize: 32, marginBottom: 12, color: "#059669" }}>✓</div>
+              <div style={{ fontSize: 18, fontWeight: 600, color: textHi, marginBottom: 8 }}>You're on our list.</div>
+              <p style={{ fontSize: 14, color: textLow }}>We'll be in touch within one business day.</p>
+            </div>
+          ) : (
+            <>
+              <div style={{ fontSize: 16, fontWeight: 700, color: textHi, marginBottom: 4, textAlign: "center" }}>
+                Get started in 30 seconds.
+              </div>
+              <p style={{ fontSize: 13, color: textLow, marginBottom: 20, textAlign: "center" }}>
+                Drop your info and we'll reach out within one business day.
+              </p>
+              <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                <input
+                  type="text"
+                  placeholder="Your name"
+                  required
+                  value={form.name}
+                  onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+                  style={{
+                    background: bg, border: `1px solid ${border}`,
+                    borderRadius: 10, padding: "14px 16px",
+                    fontSize: 15, color: textHi, fontFamily: "inherit", outline: "none",
+                  }}
+                  onFocus={e => { e.target.style.borderColor = blue; }}
+                  onBlur={e => { e.target.style.borderColor = border; }}
+                />
+                <input
+                  type="email"
+                  placeholder="Work email"
+                  required
+                  value={form.email}
+                  onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+                  style={{
+                    background: bg, border: `1px solid ${border}`,
+                    borderRadius: 10, padding: "14px 16px",
+                    fontSize: 15, color: textHi, fontFamily: "inherit", outline: "none",
+                  }}
+                  onFocus={e => { e.target.style.borderColor = blue; }}
+                  onBlur={e => { e.target.style.borderColor = border; }}
+                />
+                <button
+                  type="submit"
+                  disabled={status === "sending"}
+                  style={{
+                    background: blue, color: "#fff", border: "none",
+                    borderRadius: 10, padding: "16px",
+                    fontSize: 16, fontWeight: 600, cursor: status === "sending" ? "wait" : "pointer",
+                    fontFamily: "inherit", letterSpacing: -0.2, width: "100%",
+                    boxShadow: `0 0 30px ${blueGlow}`,
+                    opacity: status === "sending" ? 0.7 : 1,
+                  }}
+                >
+                  {status === "sending" ? "Sending…" : "Get in touch →"}
+                </button>
+                {status === "error" && (
+                  <p style={{ fontSize: 13, color: "#f87171", margin: 0, textAlign: "center" }}>
+                    Something went wrong — email us at will@solognecourtholdings.com
+                  </p>
+                )}
+              </form>
+            </>
+          )}
+        </div>
+        <p style={{ fontSize: 12, color: textLow, marginTop: 16 }}>
+          No commitment · We reply within one business day
+        </p>
       </section>
 
       {/* ── How it works ─────────────────────────────────────────────────────── */}
@@ -220,79 +278,6 @@ export default function OutreachLanding({ navigate }) {
               </div>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* ── Lead form ────────────────────────────────────────────────────────── */}
-      <section id="book" style={{ background: bg2, borderTop: `1px solid ${border}` }}>
-        <div className="mob-sec" style={{ maxWidth: 520, margin: "0 auto", padding: "80px 24px", textAlign: "center" }}>
-          <h2 style={{ fontSize: "clamp(28px, 4vw, 42px)", fontWeight: 700, letterSpacing: -1, color: textHi, marginBottom: 12 }}>
-            Let's talk.
-          </h2>
-          <p style={{ fontSize: 16, color: textLow, marginBottom: 40 }}>
-            Drop your info and we'll reach out within one business day.
-          </p>
-
-          {status === "done" ? (
-            <div style={{
-              background: card, border: "1px solid #065f46",
-              borderRadius: 16, padding: "40px 32px",
-            }}>
-              <div style={{ fontSize: 32, marginBottom: 12 }}>✓</div>
-              <div style={{ fontSize: 18, fontWeight: 600, color: textHi, marginBottom: 8 }}>You're on our list.</div>
-              <p style={{ fontSize: 14, color: textLow }}>We'll be in touch within one business day.</p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 16, textAlign: "left" }}>
-              <input
-                type="text"
-                placeholder="Your name"
-                required
-                value={form.name}
-                onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-                style={{
-                  background: card, border: `1px solid ${border}`,
-                  borderRadius: 10, padding: "14px 18px",
-                  fontSize: 15, color: textHi, fontFamily: "inherit", outline: "none",
-                }}
-                onFocus={e => { e.target.style.borderColor = blue; }}
-                onBlur={e => { e.target.style.borderColor = border; }}
-              />
-              <input
-                type="email"
-                placeholder="Work email"
-                required
-                value={form.email}
-                onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-                style={{
-                  background: card, border: `1px solid ${border}`,
-                  borderRadius: 10, padding: "14px 18px",
-                  fontSize: 15, color: textHi, fontFamily: "inherit", outline: "none",
-                }}
-                onFocus={e => { e.target.style.borderColor = blue; }}
-                onBlur={e => { e.target.style.borderColor = border; }}
-              />
-              <button
-                type="submit"
-                disabled={status === "sending"}
-                style={{
-                  background: blue, color: "#fff", border: "none",
-                  borderRadius: 10, padding: "16px",
-                  fontSize: 16, fontWeight: 600, cursor: status === "sending" ? "wait" : "pointer",
-                  fontFamily: "inherit", letterSpacing: -0.2, width: "100%",
-                  boxShadow: `0 0 30px ${blueGlow}`,
-                  opacity: status === "sending" ? 0.7 : 1,
-                }}
-              >
-                {status === "sending" ? "Sending…" : "Get in touch →"}
-              </button>
-              {status === "error" && (
-                <p style={{ fontSize: 13, color: "#f87171", margin: 0, textAlign: "center" }}>
-                  Something went wrong — email us at will@solognecourtholdings.com
-                </p>
-              )}
-            </form>
-          )}
         </div>
       </section>
 
