@@ -102,51 +102,52 @@ export default function ProviderLanding({ navigate }) {
       {/* ── Hero (form front-and-center) ─────────────────────────────────────── */}
       <section
         className="mob-hero"
-        style={{
-          maxWidth: 600, margin: "0 auto", padding: "72px 24px 80px",
-          textAlign: "center",
-        }}
+        style={{ maxWidth: 1140, margin: "0 auto", padding: "88px 24px 96px" }}
       >
-        <div
-          style={{
-            display: "inline-block",
-            background: "#10b9811a", color: "#10b981",
-            border: "1px solid #10b9813a",
-            borderRadius: 100, padding: "5px 16px",
-            fontSize: 12, fontWeight: 600, letterSpacing: 1,
-            textTransform: "uppercase", marginBottom: 24,
-          }}
-        >
-          For healthcare providers
+       <div style={{ display: "flex", flexWrap: "wrap", gap: 56, alignItems: "center", justifyContent: "center" }}>
+
+        {/* Left — copy */}
+        <div style={{ flex: "1 1 440px", maxWidth: 600 }}>
+          <div
+            style={{
+              display: "inline-block",
+              background: "#10b9811a", color: "#10b981",
+              border: "1px solid #10b9813a",
+              borderRadius: 100, padding: "5px 16px",
+              fontSize: 12, fontWeight: 600, letterSpacing: 1,
+              textTransform: "uppercase", marginBottom: 24,
+            }}
+          >
+            For healthcare providers
+          </div>
+
+          <h1
+            style={{
+              fontSize: "clamp(40px, 5.4vw, 66px)",
+              fontWeight: 700, lineHeight: 1.04,
+              letterSpacing: -2.5, marginBottom: 24,
+              color: "#0F172A",
+            }}
+          >
+            We handle every insurance{" "}
+            <span style={{ color: "#10b981" }}>denial your patients receive.</span>
+          </h1>
+
+          <p
+            style={{
+              fontSize: "clamp(17px, 1.7vw, 21px)",
+              color: "#64748B", lineHeight: 1.6,
+              maxWidth: 540,
+            }}
+          >
+            We take over the appeals process end-to-end — writing, filing, and following up on denied claims on behalf of your patients, so your staff doesn't have to.
+          </p>
         </div>
 
-        <h1
-          style={{
-            fontSize: "clamp(32px, 5vw, 54px)",
-            fontWeight: 700, lineHeight: 1.07,
-            letterSpacing: -2, marginBottom: 20,
-            color: "#0F172A",
-          }}
-        >
-          We handle every insurance
-          <br />
-          <span style={{ color: "#10b981" }}>denial your patients receive.</span>
-        </h1>
-
-        <p
-          style={{
-            fontSize: "clamp(16px, 2vw, 18px)",
-            color: "#64748B", lineHeight: 1.7,
-            maxWidth: 540, margin: "0 auto 36px",
-          }}
-        >
-          We take over the appeals process end-to-end — writing, filing, and following up on denied claims on behalf of your patients, so your staff doesn't have to.
-        </p>
-
-        {/* Lead form */}
+        {/* Right — form */}
+        <div style={{ flex: "0 1 440px", width: "100%", maxWidth: 440 }}>
         <div
           style={{
-            maxWidth: 440, margin: "0 auto",
             background: "#FFFFFF", border: "1px solid #E2E8F0",
             borderRadius: 18, padding: "28px 24px",
             boxShadow: "0 10px 40px rgba(15,23,42,0.06), 0 2px 8px rgba(15,23,42,0.04)",
@@ -219,9 +220,12 @@ export default function ProviderLanding({ navigate }) {
             </>
           )}
         </div>
-        <p style={{ fontSize: 12, color: "#64748B", marginTop: 16 }}>
+        <p style={{ fontSize: 12, color: "#64748B", marginTop: 16, textAlign: "center" }}>
           No commitment · We reply within one business day
         </p>
+        </div>
+
+       </div>
       </section>
 
       {/* ── How it works ─────────────────────────────────────────────────────── */}

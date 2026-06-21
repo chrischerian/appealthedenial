@@ -110,38 +110,43 @@ export default function OutreachLanding({ navigate }) {
       </nav>
 
       {/* ── Hero (form front-and-center) ─────────────────────────────────────── */}
-      <section className="mob-hero" style={{ maxWidth: 600, margin: "0 auto", padding: "72px 24px 80px", textAlign: "center" }}>
-        <div style={{
-          display: "inline-block",
-          background: "#10b9811a", color: blue,
-          border: `1px solid #10b9813a`,
-          borderRadius: 100, padding: "5px 16px",
-          fontSize: 12, fontWeight: 600, letterSpacing: 1,
-          textTransform: "uppercase", marginBottom: 24,
-        }}>
-          For practice managers &amp; office admins
+      <section className="mob-hero" style={{ maxWidth: 1140, margin: "0 auto", padding: "88px 24px 96px" }}>
+       <div style={{ display: "flex", flexWrap: "wrap", gap: 56, alignItems: "center", justifyContent: "center" }}>
+
+        {/* Left — copy */}
+        <div style={{ flex: "1 1 440px", maxWidth: 600 }}>
+          <div style={{
+            display: "inline-block",
+            background: "#10b9811a", color: blue,
+            border: `1px solid #10b9813a`,
+            borderRadius: 100, padding: "5px 16px",
+            fontSize: 12, fontWeight: 600, letterSpacing: 1,
+            textTransform: "uppercase", marginBottom: 24,
+          }}>
+            For practice managers &amp; office admins
+          </div>
+
+          <h1 style={{
+            fontSize: "clamp(40px, 5.4vw, 66px)",
+            fontWeight: 700, lineHeight: 1.04,
+            letterSpacing: -2.5, marginBottom: 24, color: textHi,
+          }}>
+            Your staff shouldn't be{" "}
+            <span style={{ color: blue }}>fighting insurance denials.</span>
+          </h1>
+
+          <p style={{
+            fontSize: "clamp(17px, 1.7vw, 21px)",
+            color: textLow, lineHeight: 1.6,
+            maxWidth: 520,
+          }}>
+            We handle the entire appeals process for your patients — writing, filing, and following up — so your team can focus on care, not paperwork.
+          </p>
         </div>
 
-        <h1 style={{
-          fontSize: "clamp(32px, 5vw, 52px)",
-          fontWeight: 700, lineHeight: 1.1,
-          letterSpacing: -2, marginBottom: 20, color: textHi,
-        }}>
-          Your staff shouldn't be<br />
-          <span style={{ color: blue }}>fighting insurance denials.</span>
-        </h1>
-
-        <p style={{
-          fontSize: "clamp(16px, 2vw, 18px)",
-          color: textLow, lineHeight: 1.7,
-          maxWidth: 520, margin: "0 auto 36px",
-        }}>
-          We handle the entire appeals process for your patients — writing, filing, and following up — so your team can focus on care, not paperwork.
-        </p>
-
-        {/* Lead form */}
+        {/* Right — form */}
+        <div style={{ flex: "0 1 440px", width: "100%", maxWidth: 440 }}>
         <div style={{
-          maxWidth: 440, margin: "0 auto",
           background: card, border: `1px solid ${border}`,
           borderRadius: 18, padding: "28px 24px",
           boxShadow: "0 10px 40px rgba(15,23,42,0.06), 0 2px 8px rgba(15,23,42,0.04)",
@@ -213,9 +218,12 @@ export default function OutreachLanding({ navigate }) {
             </>
           )}
         </div>
-        <p style={{ fontSize: 12, color: textLow, marginTop: 16 }}>
+        <p style={{ fontSize: 12, color: textLow, marginTop: 16, textAlign: "center" }}>
           No commitment · We reply within one business day
         </p>
+        </div>
+
+       </div>
       </section>
 
       {/* ── How it works ─────────────────────────────────────────────────────── */}
