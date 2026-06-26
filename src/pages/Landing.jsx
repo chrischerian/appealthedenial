@@ -351,9 +351,7 @@ export default function Landing({ navigate }) {
           flexWrap: "wrap", gap: 12,
         }}
       >
-        <div style={{ fontSize: 13, fontWeight: 600, color: "#0F172A" }}>
-          Appeal<span style={{ color: "#059669" }}>TheDenial</span>
-        </div>
+        <Logo height={24} />
         <div style={{ fontSize: 12, color: "#94A3B8" }}>
           Not a law firm. Not legal advice. Results vary.
         </div>

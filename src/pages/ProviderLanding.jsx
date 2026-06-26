@@ -385,9 +385,7 @@ export default function ProviderLanding({ navigate }) {
           flexWrap: "wrap", gap: 12,
         }}
       >
-        <div style={{ fontSize: 13, fontWeight: 600, color: "#0F172A" }}>
-          Appeal<span style={{ color: "#10b981" }}>TheDenial</span>
-        </div>
+        <Logo height={24} />
         <a
           href="/admin"
           style={{ fontSize: 11, color: "#94A3B8", textDecoration: "none" }}
