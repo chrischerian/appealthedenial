@@ -8,7 +8,7 @@ export function Logo({ height = 32 }) {
         </g>
       </svg>
       <span style={{ fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 600, fontSize: height * 0.62, color: "#059669", letterSpacing: "-0.01em" }}>
-        Appeal The Denial
+        AppealTheDenial
       </span>
     </div>
   );
