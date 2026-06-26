@@ -385,7 +385,7 @@ export default function ProviderLanding({ navigate }) {
           flexWrap: "wrap", gap: 12,
         }}
       >
-        <Logo height={24} />
+        <Logo height={32} />
         <a
           href="/admin"
           style={{ fontSize: 11, color: "#94A3B8", textDecoration: "none" }}

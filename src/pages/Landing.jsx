@@ -351,7 +351,7 @@ export default function Landing({ navigate }) {
           flexWrap: "wrap", gap: 12,
         }}
       >
-        <Logo height={24} />
+        <Logo height={32} />
         <div style={{ fontSize: 12, color: "#94A3B8" }}>
           Not a law firm. Not legal advice. Results vary.
         </div>

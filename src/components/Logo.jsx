@@ -1,6 +1,6 @@
-export function Logo({ height = 32 }) {
+export function Logo({ height = 44 }) {
   return (
-    <div style={{ display: "inline-flex", alignItems: "center", gap: 10 }}>
+    <div style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
       <svg height={height} viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Appeal The Denial logo">
         <g transform="rotate(-28 32 32)">
           <rect x="14" y="23" width="36" height="18" rx="9" fill="none" stroke="#059669" strokeWidth="3.5" />
