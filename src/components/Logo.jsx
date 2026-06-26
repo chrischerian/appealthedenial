@@ -7,7 +7,7 @@ export function Logo({ height = 32 }) {
           <path d="M32 23 H41 A9 9 0 0 1 41 41 H32 Z" fill="#059669" />
         </g>
       </svg>
-      <span style={{ fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 500, fontSize: height * 0.62, color: "#059669", letterSpacing: "-0.01em" }}>
+      <span style={{ fontFamily: '"DM Sans", system-ui, sans-serif', fontWeight: 600, fontSize: height * 0.62, color: "#059669", letterSpacing: "-0.01em" }}>
         Appeal The Denial
       </span>
     </div>
