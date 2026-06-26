@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Logo } from "../components/Logo.jsx";
 
 const DENIAL_TYPES = [
   { label: "Medical Necessity",   desc: "We challenge the denial on clinical grounds with a formal letter citing applicable standards of care." },
@@ -77,9 +78,7 @@ export default function ProviderLanding({ navigate }) {
           background: "rgba(255,255,255,0.85)", backdropFilter: "blur(12px)",
         }}
       >
-        <div style={{ fontSize: 15, fontWeight: 700, letterSpacing: -0.3, color: "#0F172A" }}>
-          Appeal<span style={{ color: "#10b981" }}>TheDenial</span>
-        </div>
+        <Logo />
         <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
           <a
             href="mailto:willjhooper@msn.com"

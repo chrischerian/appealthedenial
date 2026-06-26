@@ -1,5 +1,6 @@
 // ── Cold email landing page — appealthedenial.com/hello ──────────────────────
 import { useState } from "react";
+import { Logo } from "../components/Logo.jsx";
 
 const BENEFITS = [
   {
@@ -91,9 +92,7 @@ export default function OutreachLanding() {
         position: "sticky", top: 0, zIndex: 10,
         background: "rgba(255,255,255,0.85)", backdropFilter: "blur(12px)",
       }}>
-        <div style={{ fontSize: 15, fontWeight: 700, letterSpacing: -0.3, color: textHi }}>
-          Appeal<span style={{ color: blue }}>TheDenial</span>
-        </div>
+        <Logo />
       </nav>
 
       {/* ── Hero (form front-and-center) ─────────────────────────────────────── */}

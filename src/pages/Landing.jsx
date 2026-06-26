@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Logo } from "../components/Logo.jsx";
 
 const HOW_IT_WORKS = [
   {
@@ -97,9 +98,7 @@ export default function Landing({ navigate }) {
           background: "rgba(255,255,255,0.85)", backdropFilter: "blur(12px)",
         }}
       >
-        <div style={{ fontSize: 15, fontWeight: 700, letterSpacing: -0.3, color: "#0F172A" }}>
-          Appeal<span style={{ color: "#059669" }}>TheDenial</span>
-        </div>
+        <Logo />
         <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
           <button
             onClick={() => navigate("/status")}
